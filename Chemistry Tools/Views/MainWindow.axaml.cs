@@ -17,7 +17,7 @@ public partial class MainWindow : Window
 #endif
         string key = "+tmxn2gyjXh4VK5AykT5HT/E9qEM34/+GTaspXU1dWA=";
         _sparkle = new SparkleUpdater(
-            "https://mega.nz/file/9EFWnLaZ#UBeO6LU0_8oolhBKOvNZTRqrVRGth7E4Hbrbb0DbmAY",
+            "https://chemistry-tools.netlify.app/appcast.xml",
             new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, key))
         {
             UIFactory = new NetSparkleUpdater.UI.Avalonia.UIFactory(Icon),
