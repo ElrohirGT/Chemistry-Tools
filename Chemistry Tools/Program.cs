@@ -16,8 +16,14 @@ internal class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
-            .UsePlatformDetect()
-            .LogToTrace(Avalonia.Logging.LogEventLevel.Debug)
-            .UseReactiveUI();
+    {
+        var loggingLevel = Avalonia.Logging.LogEventLevel.Warning;
+#if DEBUG
+        loggingLevel = Avalonia.Logging.LogEventLevel.Debug;
+#endif
+        return AppBuilder.Configure<App>()
+                   .UsePlatformDetect()
+                   .LogToTrace(loggingLevel)
+                   .UseReactiveUI();
+    }
 }
