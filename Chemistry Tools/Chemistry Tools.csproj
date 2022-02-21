@@ -2,10 +2,23 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64;osx-x64</RuntimeIdentifiers>
     <Nullable>enable</Nullable>
     <AssemblyVersion>0.0.0</AssemblyVersion>
     <Version>0.0.0</Version>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <CFBundleName>Chemistry Tools</CFBundleName><!-- Also defines .app file name -->
+    <CFBundleDisplayName>Chemistry Tools</CFBundleDisplayName>
+    <CFBundleIdentifier>com.elrohirgt</CFBundleIdentifier>
+    <CFBundleVersion>0.0.0</CFBundleVersion>
+    <CFBundleShortVersionString>0.0.0</CFBundleShortVersionString>
+    <CFBundlePackageType>APPL</CFBundlePackageType>
+    <CFBundleExecutable>Chemistry Tools</CFBundleExecutable>
+    <CFBundleIconFile>Assets\icon.icns</CFBundleIconFile> <!-- Will be copied from output directory -->
+    <NSPrincipalClass>NSApplication</NSPrincipalClass>
+    <NSHighResolutionCapable>true</NSHighResolutionCapable>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -21,10 +34,14 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.12" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
+    <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
     <PackageReference Include="NetSparkleUpdater.UI.Avalonia" Version="2.0.15" />
     <PackageReference Include="NP.Avalonia.Visuals" Version="1.0.11" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Assets\icon.icns">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="LICENSE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
