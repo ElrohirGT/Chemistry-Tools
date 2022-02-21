@@ -1,52 +1,53 @@
 using System;
-
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 
+using Chemistry_Tools.ViewModels;
+using Avalonia.ReactiveUI;
+using System.Threading.Tasks;
+using ReactiveUI;
 using NetSparkleUpdater;
-using NetSparkleUpdater.SignatureVerifiers;
+using Chemistry_Tools.Views.PopUps;
+using Avalonia;
 
 namespace Chemistry_Tools.Views;
-public partial class MainWindow : Window
+public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
-    private readonly SparkleUpdater _sparkle;
-
+    readonly MainWindowViewModel _viewModel;
     public MainWindow()
     {
         InitializeComponent();
 #if DEBUG
-            this.AttachDevTools();
+        this.AttachDevTools();
 #endif
-        string key = "+tmxn2gyjXh4VK5AykT5HT/E9qEM34/+GTaspXU1dWA=";
-        _sparkle = new SparkleUpdater(
-            "https://chemistry-tools.netlify.app/windows/appcast.xml",
-            new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.UseIfPossible, key))
-        {
-            UIFactory = new NetSparkleUpdater.UI.Avalonia.UIFactory(Icon),
-            ShowsUIOnMainThread = true,
-            UseNotificationToast = false
-        };
-
-        _sparkle.StartLoop(true, true);
+        DataContext = _viewModel = new MainWindowViewModel();
+        _viewModel.ShouldUpdateInteraction.RegisterHandler(DoShowDialogAsync);
+        _viewModel.ShouldCancelDownload.RegisterHandler(CancelDialogAsync);
+        _viewModel.Close += Close;
     }
 
-    protected override async void OnOpened(EventArgs e)
+    private async Task CancelDialogAsync(InteractionContext<SparkleUpdater, bool> interaction)
     {
-        try
-        {
-            var result = await _sparkle.CheckForUpdatesAtUserRequest();
-        }
-        catch (Exception err)
-        {
+        UpdateDownloadingWindow popUp = new();
+        interaction.Input.DownloadMadeProgress -= popUp.ViewModel.ChangeProgress;
+        interaction.Input.DownloadMadeProgress += popUp.ViewModel.ChangeProgress;
 
-            throw;
-        }
+        interaction.Input.DownloadFinished += popUp.ViewModel.UpdateFinished;
+
+        bool shouldCancel = await popUp.ShowDialog<bool>(this);
+        interaction.SetOutput(shouldCancel);
     }
 
-    private void InitializeComponent()
+    protected override async void OnOpened(EventArgs e) => await _viewModel.OnOpened(e);
+    public async Task DoShowDialogAsync(InteractionContext<AppCastItem, bool> interaction)
     {
-        AvaloniaXamlLoader.Load(this);
+        UpdatePopUpWindow popUp = new();
+        if (popUp.UpdateInfoStackPanel is not null)
+            popUp.UpdateInfoStackPanel.DataContext = interaction.Input;
+        //TODO: Add a logging error here!
+
+        bool result = await popUp.ShowDialog<bool>(this);
+        interaction.SetOutput(result);
     }
+
+    private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 }

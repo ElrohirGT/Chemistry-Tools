@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:Chemistry_Tools.ViewModels"
+        Width="250" Height="100"
+        Padding="10"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="100"
+        x:Class="Chemistry_Tools.Views.PopUps.UpdateDownloadingWindow"
+        Icon="/Assets/icon.ico"
+        WindowStartupLocation="CenterOwner"
+        Title="Actualización">
+  <Design.DataContext>
+    <vm:UpdateDownloadingViewModel/>
+  </Design.DataContext>
+  <StackPanel x:DataType="vm:UpdateDownloadingViewModel" Orientation="Vertical">
+    <TextBlock Text="Descargando actualización..." Margin="0,0,0,10"/>
+    <ProgressBar Value="{Binding DownloadProgress}" ShowProgressText="True" Margin="0,0,0,5"/>
+    <Button HorizontalAlignment="Center" Command="{Binding CancelDownloadCommand}" CommandParameter="{StaticResource True}">Cancelar</Button>
+  </StackPanel>
+</Window>
