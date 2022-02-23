@@ -36,7 +36,10 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
     <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
     <PackageReference Include="NetSparkleUpdater.UI.Avalonia" Version="2.0.15" />
-    <PackageReference Include="NP.Avalonia.Visuals" Version="1.0.11" />
+    <PackageReference Include="TextCopy" Version="6.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chemistry Tools.Infrastructure\Chemistry Tools.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Assets\icon.icns">
