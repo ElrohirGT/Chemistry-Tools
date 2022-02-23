@@ -1,7 +1,6 @@
 using System;
 
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 
@@ -23,11 +22,8 @@ public partial class UpdatePopUpWindow : ReactiveWindow<UpdatePopUpViewModel>
         this.WhenActivated(d => d(_viewModel!.CloseDialogCommand.Subscribe(v => Close(v))));
     }
 
-    public StackPanel? UpdateInfoStackPanel { get; private set; }
-
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
-        UpdateInfoStackPanel = this.FindControl<StackPanel>("UpdateInfoContainer");
     }
 }

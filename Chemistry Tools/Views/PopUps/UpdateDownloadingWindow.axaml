@@ -13,9 +13,11 @@
   <Design.DataContext>
     <vm:UpdateDownloadingViewModel/>
   </Design.DataContext>
-  <StackPanel x:DataType="vm:UpdateDownloadingViewModel" Orientation="Vertical">
+  <StackPanel Orientation="Vertical">
     <TextBlock Text="Descargando actualización..." Margin="0,0,0,10"/>
-    <ProgressBar Value="{Binding DownloadProgress}" ShowProgressText="True" Margin="0,0,0,5"/>
-    <Button HorizontalAlignment="Center" Command="{Binding CancelDownloadCommand}" CommandParameter="{StaticResource True}">Cancelar</Button>
+    <ProgressBar IsVisible="{Binding !HasError}" Value="{Binding DownloadProgress}" ShowProgressText="True" Margin="0,0,0,5"/>
+    <TextBlock IsVisible="{Binding HasError}" Text="{Binding DownloadError}" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+    <Button IsVisible="{Binding !HasError}" HorizontalAlignment="Center" Command="{Binding CancelDownloadCommand}" CommandParameter="{StaticResource True}">Cancelar</Button>
+    <Button IsVisible="{Binding HasError}" Command="{Binding CancelDownloadCommand}" CommandParameter="{StaticResource True}" HorizontalAlignment="Center">Aceptar</Button>
   </StackPanel>
 </Window>

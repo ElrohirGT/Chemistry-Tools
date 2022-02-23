@@ -8,6 +8,7 @@ using ReactiveUI;
 using NetSparkleUpdater;
 using Chemistry_Tools.Views.PopUps;
 using Avalonia;
+using System.Reactive;
 
 namespace Chemistry_Tools.Views;
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
@@ -22,7 +23,17 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         DataContext = _viewModel = new MainWindowViewModel();
         _viewModel.ShouldUpdateInteraction.RegisterHandler(DoShowDialogAsync);
         _viewModel.ShouldCancelDownload.RegisterHandler(CancelDialogAsync);
+        _viewModel.ShowError.RegisterHandler(ShowErrorDialogAsync);
         _viewModel.Close += Close;
+    }
+
+    private async Task ShowErrorDialogAsync(InteractionContext<Exception, Unit> interaction)
+    {
+        ErrorPopUpWindow errorPoUp = new();
+        errorPoUp.ViewModel.Error = interaction.Input;
+
+        var result = await errorPoUp.ShowDialog<Unit>(this);
+        interaction.SetOutput(result);
     }
 
     private async Task CancelDialogAsync(InteractionContext<SparkleUpdater, bool> interaction)
@@ -31,7 +42,11 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         interaction.Input.DownloadMadeProgress -= popUp.ViewModel.ChangeProgress;
         interaction.Input.DownloadMadeProgress += popUp.ViewModel.ChangeProgress;
 
+        interaction.Input.DownloadFinished -= popUp.ViewModel.UpdateFinished;
         interaction.Input.DownloadFinished += popUp.ViewModel.UpdateFinished;
+
+        interaction.Input.DownloadHadError -= popUp.ViewModel.DownloadHadError;
+        interaction.Input.DownloadHadError += popUp.ViewModel.DownloadHadError;
 
         bool shouldCancel = await popUp.ShowDialog<bool>(this);
         interaction.SetOutput(shouldCancel);
@@ -41,9 +56,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     public async Task DoShowDialogAsync(InteractionContext<AppCastItem, bool> interaction)
     {
         UpdatePopUpWindow popUp = new();
-        if (popUp.UpdateInfoStackPanel is not null)
-            popUp.UpdateInfoStackPanel.DataContext = interaction.Input;
-        //TODO: Add a logging error here!
+        popUp.ViewModel.AppCastItem = interaction.Input;
 
         bool result = await popUp.ShowDialog<bool>(this);
         interaction.SetOutput(result);

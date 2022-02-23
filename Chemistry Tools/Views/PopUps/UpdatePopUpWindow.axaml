@@ -5,6 +5,7 @@
         xmlns:vm="using:Chemistry_Tools.ViewModels"
         xmlns:updater="using:NetSparkleUpdater"
         Width="400" Height="NaN"
+        Padding="20"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="NaN"
         x:Class="Chemistry_Tools.Views.PopUps.UpdatePopUpWindow"
         Icon="/Assets/icon.ico"
@@ -14,15 +15,15 @@
   <Design.DataContext>
     <vm:UpdatePopUpViewModel/>
   </Design.DataContext>
-  <StackPanel Margin="40" Orientation="Vertical">
-    <StackPanel x:Class="updater:AppCastItem" x:Name="UpdateInfoContainer" Orientation="Vertical">
+  <StackPanel Orientation="Vertical">
+    <StackPanel DataContext="{Binding AppCastItem}" Orientation="Vertical">
       <TextBlock Text="Hay una nueva versión disponible!" FontSize="20"/>
       <TextBlock Text="{Binding AppVersionInstalled, StringFormat=Actual: {0}}"/>
       <TextBlock Text="{Binding Version, StringFormat=Nueva: {0}}"/>
     </StackPanel>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource True}" IsEnabled="True">Actualizar</Button>
-      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource False}" IsEnabled="True">No Gracias</Button>
+      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource True}" IsEnabled="True">Descargar</Button>
+      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource False}" IsEnabled="True">Omitir</Button>
     </StackPanel>
   </StackPanel>
 
