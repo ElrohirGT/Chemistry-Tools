@@ -26,6 +26,7 @@ The following links contain the downloads for the specified platforms:
 
 ## Updates
 Updates are automatically downloaded to your system, although for the moment, they're only installed automatically on windows. This means that you you need to re-install the new version of the application manually if your on MacOS or Linux.
+
 * MAC: The app will download the update and will open a folder where the uncompressed app is located, just move it to the Applications folder and delete the folder were the new version was.
 * LINUX: The app will download the update and will open up a terminal where the locations of the downloaded .tar.gz is. Repeat the same steps you did when installing the app.
 
