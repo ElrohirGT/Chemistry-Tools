@@ -21,13 +21,13 @@ The following links contain the downloads for the specified platforms:
 
 ## Installation
 * Installation in Windows is the easiest, you'll just need to run the installer, no other downloads required.
-* For MacOS you'll ned to do a little bit mor work, download the .zip and uncrompress it. Then paste the uncompressed app to the Applications folder.
-* Finally for linux, download the .tar.gz, uncompress it wherever you want and run the application.
+* For MacOS you'll need to do a little bit more work, download the .zip and uncompress it. Then paste the uncompressed app to the Applications folder.
+* For linux, download the .tar.gz, uncompress it wherever you want and run the application.
 
 ## Updates
-Updates are automatically downloaded to your system, although for the moment, they're only installed automatically on windows. This means that you you need to re-install the new version of the application manually if your on MacOS or Linux.
+Updates are automatically downloaded to your system, although for the moment, they're only installed automatically on windows. This means that you need to re-install the new version of the application manually if your on MacOS or Linux.
 
-* MAC: The app will download the update and will open a folder where the uncompressed app is located, just move it to the Applications folder and delete the folder were the new version was.
+* MAC: The app will download the update and will open a folder where the uncompressed app is located, just move it to the Applications folder replacing the old version. You may delete the folder were the new version was.
 * LINUX: The app will download the update and will open up a terminal where the locations of the downloaded .tar.gz is. Repeat the same steps you did when installing the app.
 
 ## Features and usage
