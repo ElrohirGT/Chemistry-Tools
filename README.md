@@ -3,16 +3,14 @@ Some nifty tools for chemists. Inspired by [DevToys](https://github.com/veler/De
 
 Made with [Avalonia](https://github.com/AvaloniaUI/Avalonia) and [NetSparkle](https://github.com/NetSparkleUpdater/NetSparkle).
 
+[GitHub](https://github.com/ElrohirGT/Chemistry-Tools/) [WebPage](https://chemistry-tools.netlify.app/) [Trello](https://trello.com/b/fFzjvGlI/chemistry-app)
+
 - [Chemistry-Tools](#chemistry-tools)
-  * [Roadmap](#roadmap)
   * [Downloads](#downloads)
   * [Installation](#installation)
   * [Updates](#updates)
   * [Features and usage](#features-and-usage)
   * [Attributions](#attributions)
-
-## Roadmap
-Take a look at the [Chemistry Tools Trello here](https://trello.com/b/fFzjvGlI/chemistry-app).
 
 ## Downloads
 The following links contain the downloads for the specified platforms:
