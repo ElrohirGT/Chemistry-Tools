@@ -36,6 +36,8 @@ Currently none of the features are implemented.
 Take a look at [Roadmap](#roadmap) to see what's in development!
 
 ## Attributions
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 **App Icon:**
 <a href="https://www.flaticon.com/free-icons/chemistry" title="chemistry icons">Chemistry icons created by Freepik - Flaticon</a>
+
+**Table of contents:**
+<a href='http://ecotrust-canada.github.io/markdown-toc/'>markdown-toc</a>
