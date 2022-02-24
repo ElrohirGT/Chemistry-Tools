@@ -26,7 +26,8 @@ public partial class MainWindow : CoreWindow
         _viewModel.ShouldCancelDownload.RegisterHandler(CancelDialogAsync);
         _viewModel.ShowError.RegisterHandler(ShowErrorDialogAsync);
         _viewModel.Close += Close;
-        TitleBar.ExtendViewIntoTitleBar = true;
+        if (TitleBar is not null)
+            TitleBar.ExtendViewIntoTitleBar = true;
         //SetTitleBar(TitleBar);
     }
 
