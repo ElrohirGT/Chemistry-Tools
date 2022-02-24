@@ -3,16 +3,28 @@
         xmlns:vm="using:Chemistry_Tools.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="using:Chemistry_Tools.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Chemistry_Tools.Views.MainWindow"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/icon.ico"
-        Title="Chemistry Tools">
+        Title="Chemistry Tools"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+  <Panel Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}" Opacity="0.7">
+    
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" RelativePanel.AlignLeftWithPanel="True">
+          <Image Source="/Assets/icon.png" Height="30" ClipToBounds="True"/>
+          <TextBlock Text="Chemistry Tools" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Button>
+          <DrawingPresenter Height="20" Drawing="{DynamicResource FluentIconsFilled.clipboard_filled}"/>
+        </Button>
+    </DockPanel>
+  </Panel>
 </Window>

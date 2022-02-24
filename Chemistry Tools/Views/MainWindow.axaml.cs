@@ -9,9 +9,10 @@ using NetSparkleUpdater;
 using Chemistry_Tools.Views.PopUps;
 using Avalonia;
 using System.Reactive;
+using FluentAvalonia.UI.Controls;
 
 namespace Chemistry_Tools.Views;
-public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
+public partial class MainWindow : CoreWindow
 {
     readonly MainWindowViewModel _viewModel;
     public MainWindow()
@@ -25,6 +26,8 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         _viewModel.ShouldCancelDownload.RegisterHandler(CancelDialogAsync);
         _viewModel.ShowError.RegisterHandler(ShowErrorDialogAsync);
         _viewModel.Close += Close;
+        TitleBar.ExtendViewIntoTitleBar = true;
+        //SetTitleBar(TitleBar);
     }
 
     private async Task ShowErrorDialogAsync(InteractionContext<Exception, Unit> interaction)
