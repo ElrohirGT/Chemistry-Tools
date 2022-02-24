@@ -21,7 +21,7 @@
       <TextBlock Text="{Binding AppVersionInstalled, StringFormat=Actual: {0}}"/>
       <TextBlock Text="{Binding Version, StringFormat=Nueva: {0}}"/>
     </StackPanel>
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
       <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource True}" IsEnabled="True">Descargar</Button>
       <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource False}" IsEnabled="True">Omitir</Button>
     </StackPanel>
