@@ -24,6 +24,10 @@
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
+    <None Remove="FluentUIIcons.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="FluentUIIcons.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\icon.ico" />
@@ -35,6 +39,7 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.12" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
     <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
+    <PackageReference Include="FluentAvaloniaUI" Version="1.2.1" />
     <PackageReference Include="NetSparkleUpdater.UI.Avalonia" Version="2.0.15" />
     <PackageReference Include="TextCopy" Version="6.1.0" />
   </ItemGroup>
