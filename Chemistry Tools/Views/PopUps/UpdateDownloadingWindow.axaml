@@ -8,6 +8,7 @@
         mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="100"
         x:Class="Chemistry_Tools.Views.PopUps.UpdateDownloadingWindow"
         Icon="/Assets/icon.ico"
+        ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterOwner"
         Title="Actualización">
   <Design.DataContext>

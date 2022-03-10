@@ -2,14 +2,14 @@ using System;
 using Avalonia.Markup.Xaml;
 
 using Chemistry_Tools.ViewModels;
-using Avalonia.ReactiveUI;
 using System.Threading.Tasks;
 using ReactiveUI;
-using NetSparkleUpdater;
 using Chemistry_Tools.Views.PopUps;
 using Avalonia;
 using System.Reactive;
 using FluentAvalonia.UI.Controls;
+using Chemistry_Tools.Core.Updaters;
+using Splat;
 
 namespace Chemistry_Tools.Views;
 public partial class MainWindow : CoreWindow
@@ -21,7 +21,7 @@ public partial class MainWindow : CoreWindow
 #if DEBUG
         this.AttachDevTools();
 #endif
-        DataContext = _viewModel = new MainWindowViewModel();
+        DataContext = _viewModel = Locator.Current.GetService<MainWindowViewModel>();
         _viewModel.ShouldUpdateInteraction.RegisterHandler(DoShowDialogAsync);
         _viewModel.ShouldCancelDownload.RegisterHandler(CancelDialogAsync);
         _viewModel.ShowError.RegisterHandler(ShowErrorDialogAsync);
@@ -40,7 +40,7 @@ public partial class MainWindow : CoreWindow
         interaction.SetOutput(result);
     }
 
-    private async Task CancelDialogAsync(InteractionContext<SparkleUpdater, bool> interaction)
+    private async Task CancelDialogAsync(InteractionContext<IUpdater, bool> interaction)
     {
         UpdateDownloadingWindow popUp = new();
         interaction.Input.DownloadMadeProgress -= popUp.ViewModel.ChangeProgress;
@@ -57,10 +57,10 @@ public partial class MainWindow : CoreWindow
     }
 
     protected override async void OnOpened(EventArgs e) => await _viewModel.OnOpened(e);
-    public async Task DoShowDialogAsync(InteractionContext<AppCastItem, bool> interaction)
+    public async Task DoShowDialogAsync(InteractionContext<UpdateItem, bool> interaction)
     {
         UpdatePopUpWindow popUp = new();
-        popUp.ViewModel.AppCastItem = interaction.Input;
+        popUp.ViewModel.UpdateItem = interaction.Input;
 
         bool result = await popUp.ShowDialog<bool>(this);
         interaction.SetOutput(result);

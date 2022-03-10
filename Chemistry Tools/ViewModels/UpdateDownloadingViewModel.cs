@@ -1,9 +1,6 @@
-﻿
-using System;
-using System.Reactive;
+﻿using System;
 
-using NetSparkleUpdater;
-using NetSparkleUpdater.Events;
+using Chemistry_Tools.Core.Updaters;
 
 using ReactiveUI;
 
@@ -40,10 +37,10 @@ public class UpdateDownloadingViewModel : ViewModelBase
 
     public UpdateDownloadingViewModel() => CancelDownloadCommand = ReactiveCommand.Create<bool, bool>(v => v);
 
-    internal void ChangeProgress(object sender, AppCastItem item, ItemDownloadProgressEventArgs args)
-        => DownloadProgress = args.ProgressPercentage;
+    internal void ChangeProgress(float percentage)
+        => DownloadProgress = percentage;
 
-    internal void UpdateFinished(AppCastItem item, string path) => CancelDownloadCommand?.Execute(false);
-    internal void DownloadHadError(AppCastItem item, string path, Exception exception)
+    internal void UpdateFinished(string path) => CancelDownloadCommand?.Execute(false);
+    internal void DownloadHadError(UpdateItem item, Exception exception)
         => DownloadError = $"Error downloading {item.Title}\n{exception.Message}";
 }

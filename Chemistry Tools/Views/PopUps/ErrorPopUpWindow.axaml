@@ -6,12 +6,13 @@
         mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="NaN"
         x:Class="Chemistry_Tools.Views.PopUps.ErrorPopUpWindow"
         Padding="10"
+        ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterOwner"
         Title="Error">
   <StackPanel Orientation="Vertical" Spacing="5">
     <TextBlock Text="Lo sentimos, ocurrió un error:" FontSize="20"/>
-    <Button Command="{Binding CopyErrorCommand}" CommandParameter="{Binding FullErrorMessage}">Copiar al portapapeles</Button>
-    <TextBlock Text="{Binding Error}" Background="Beige" TextWrapping="Wrap"/>
-    <Button Command="{Binding CloseDialogCommand}">Close</Button>
+    <TextBlock Text="{Binding Error}" Background="DarkGray" TextWrapping="Wrap"/>
+    <Button Command="{Binding CopyErrorCommand}" CommandParameter="{Binding FullErrorMessage}" HorizontalAlignment="Center">Copiar al portapapeles</Button>
+    <Button Command="{Binding CloseDialogCommand}" HorizontalAlignment="Center">Close</Button>
   </StackPanel>
 </Window>

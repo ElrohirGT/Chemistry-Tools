@@ -1,7 +1,6 @@
 using System.Reactive;
 
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 
@@ -22,8 +21,6 @@ public partial class ErrorPopUpWindow : ReactiveWindow<ErrorPopUpViewModel>
     }
 
     private void CloseWindow(Unit obj) => Close(obj);
-
-    public IControl? ErrorContainer { get; internal set; }
 
     private void InitializeComponent()
     {
