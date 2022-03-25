@@ -23,7 +23,8 @@
         <Image Source="/Assets/icon.png" Height="30" ClipToBounds="True"/>
         <TextBlock Text="Chemistry Tools" VerticalAlignment="Center"/>
       </StackPanel>
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+        <TextBlock Text="{Binding UserSettings.CurrentLanguage.ThemeConfigurationLabel}"/> 
         <ui:ComboBox Items="{Binding Themes}" SelectedItem="{Binding UserSettings.CurrentTheme}">
           <ui:ComboBox.ItemTemplate>
             <DataTemplate>
@@ -31,8 +32,17 @@
             </DataTemplate>
           </ui:ComboBox.ItemTemplate>
         </ui:ComboBox>
-        <ui:ImageIcon Source="{Binding UserSettings.CurrentTheme.Resources.Icon.Image}"/>
+        
+        <TextBlock Text="{Binding UserSettings.CurrentLanguage.LanguageConfigurationLabel}"/>
+        <ui:ComboBox Items="{Binding Languages}" SelectedItem="{Binding UserSettings.CurrentLanguage}">
+          <ui:ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
+          </ui:ComboBox.ItemTemplate>
+        </ui:ComboBox>
       </StackPanel>
+      <ui:ImageIcon Width="200" Height="200" Source="{Binding UserSettings.CurrentTheme.Resources.Icon.Image}"/>
     </DockPanel>
   </Panel>
 </Window>

@@ -22,4 +22,6 @@ public abstract class ViewModelBase : ReactiveObject
     protected ViewModelBase(IUserSettings appSettings) => UserSettings = appSettings;
 
     public virtual Task OnOpened(EventArgs e) => Task.CompletedTask;
+
+    public virtual Task OnClosed(EventArgs e) => Task.CompletedTask;
 }

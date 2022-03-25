@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ public class MainWindowViewModel : ViewModelBase
 {
     private readonly IUpdater _updater;
     private Theme[] _themes;
+    private Language[] _languages;
 
     public string Greeting => "Welcome to Avalonia!";
 
@@ -27,6 +29,11 @@ public class MainWindowViewModel : ViewModelBase
         get => _themes;
         private set => this.RaiseAndSetIfChanged(ref _themes, value);
     }
+    public Language[] Languages
+    {
+        get => _languages;
+        private set => this.RaiseAndSetIfChanged(ref _languages, value);
+    }
 
     public event Action? Close;
 
@@ -34,6 +41,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         _updater = updater;
         Themes = UserSettings.GetThemes();
+        Languages = UserSettings.GetLanguages();
     }
 
     public override async Task OnOpened(EventArgs e)
@@ -86,9 +94,11 @@ public class MainWindowViewModel : ViewModelBase
             _updater.CancelFileDownload();
     }
 
-    private void OnCloseApplication()
+    public override async Task OnClosed(EventArgs e)
     {
-        UserSettings.Save();
-        Close?.Invoke();
+        await base.OnClosed(e);
+        await UserSettings.Save();
     }
+
+    private void OnCloseApplication() => Close?.Invoke();
 }

@@ -5,5 +5,10 @@
 			"Icon": "dark/icon.png"
 		},
 		"Directory": "dark"
+	},
+	"CurrentLanguage": {
+		"Name": "Español",
+		"ThemeConfigurationLabel": "Tema:",
+		"LanguageConfigurationLabel": "Lenguaje:"
 	}
 }

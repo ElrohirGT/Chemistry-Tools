@@ -6,7 +6,7 @@ namespace Chemistry_Tools.Core.Settings;
 public abstract class SettingsBase<T> : ISettings<T>, INotifyPropertyChanged
 {
     readonly string _filePath;
-    private JsonSerializerOptions? _options = new() { WriteIndented = true };
+    private readonly JsonSerializerOptions _options;
 
     protected SettingsBase(string filePath, JsonSerializerOptions options)
     {
@@ -30,7 +30,7 @@ public abstract class SettingsBase<T> : ISettings<T>, INotifyPropertyChanged
 
     protected abstract Task _Save(FileStream fileStream);
 
-    protected void RaiseIfPropertyChanged<T>(ref T? backingField, T? newValue, [CallerMemberName] string? name = null) where T : IEquatable<T>
+    protected void RaiseIfPropertyChanged<P>(ref P? backingField, P? newValue, [CallerMemberName] string? name = null) where P : IEquatable<P>
     {
         if (Equals(backingField, newValue))
             return;

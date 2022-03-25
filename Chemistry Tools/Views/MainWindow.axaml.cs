@@ -55,8 +55,18 @@ public partial class MainWindow : CoreWindow
         bool shouldCancel = await popUp.ShowDialog<bool>(this);
         interaction.SetOutput(shouldCancel);
     }
+    protected override async void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        await _viewModel.OnClosed(e);
+    }
 
-    protected override async void OnOpened(EventArgs e) => await _viewModel.OnOpened(e);
+    protected override async void OnOpened(EventArgs e)
+    {
+        base.OnOpened(e);
+        await _viewModel.OnOpened(e);
+    }
+
     public async Task DoShowDialogAsync(InteractionContext<UpdateItem, bool> interaction)
     {
         UpdatePopUpWindow popUp = new();

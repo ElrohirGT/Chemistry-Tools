@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 
 using Chemistry_Tools.Core.Settings;
@@ -11,7 +13,8 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
 {
     readonly static JsonSerializerOptions OPTIONS = new()
     {
-        WriteIndented = true
+        WriteIndented = true,
+        Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
     };
     private const string CONFIG_FILE_PATH = "user.json";
     private Language? _currentLanguage;
@@ -37,7 +40,7 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
         set => RaiseIfPropertyChanged(ref _currentLanguage, value);
     }
 
-    public Language[] GetLanguages() => ExtractFromFiles<Language>("langs");
+    public Language[] GetLanguages() => ExtractFromFiles<Language>("languages");
     public Theme[] GetThemes() => ExtractFromFiles<Theme>("themes");
 
     private static T[] ExtractFromFiles<T>(string folder)
@@ -50,7 +53,7 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
         foreach (var file in jsonFiles)
         {
             using var fileStream = File.OpenRead(file);
-            var deserializedObject = JsonSerializer.Deserialize<T>(fileStream);
+            var deserializedObject = JsonSerializer.Deserialize<T>(fileStream, OPTIONS);
             if (deserializedObject is not null)
                 list.Add(deserializedObject);
         }
