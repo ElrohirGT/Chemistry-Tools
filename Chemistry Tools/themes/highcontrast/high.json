@@ -1,0 +1,7 @@
+{
+  "Name": "HighContrast",
+  "Directory": "highcontrast",
+  "Resources": {
+    "Icon": "highcontrast/icon.png"
+  }
+}

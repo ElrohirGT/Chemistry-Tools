@@ -1,8 +1,6 @@
 using System;
-using System.ComponentModel;
 
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 
@@ -10,17 +8,21 @@ using Chemistry_Tools.ViewModels;
 
 using ReactiveUI;
 
+using Splat;
+
 namespace Chemistry_Tools.Views.PopUps;
 public partial class UpdateDownloadingWindow : ReactiveWindow<UpdateDownloadingViewModel>
 {
+    private readonly UpdateDownloadingViewModel _videmodel;
+
     public UpdateDownloadingWindow()
     {
         InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-        DataContext = ViewModel = new UpdateDownloadingViewModel();
-        this.WhenActivated(d => d(ViewModel.CancelDownloadCommand.Subscribe(v => Close(!v))));
+        DataContext = _videmodel = Locator.Current.GetService<UpdateDownloadingViewModel>();
+        this.WhenActivated(d => d(_videmodel.CancelDownloadCommand.Subscribe(v => Close(!v))));
     }
 
     private void InitializeComponent()

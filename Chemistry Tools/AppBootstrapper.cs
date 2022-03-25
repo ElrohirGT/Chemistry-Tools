@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
+using Chemistry_Tools.UserSettings;
 using Chemistry_Tools.Core.Updaters;
 using Chemistry_Tools.Infrastructure;
 using Chemistry_Tools.Infrastructure.UpdatesIntallers;
@@ -24,9 +25,14 @@ internal static class AppBootstrapper
                 installer = new OSXUpdateInstaller();
             return installer;
         });
+        services.RegisterLazySingleton<IUserSettings>(() => new FluentUserSettings().Parse());
         //TODO: Use the real updater
         //services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
         services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
-        services.Register(() => new MainWindowViewModel(resolver.GetService<IUpdater>()));
+
+        services.Register(() => new ErrorPopUpViewModel(resolver.GetService<IUserSettings>()));
+        services.Register(() => new UpdateDownloadingViewModel(resolver.GetService<IUserSettings>()));
+        services.Register(() => new UpdatePopUpViewModel(resolver.GetService<IUserSettings>()));
+        services.Register(() => new MainWindowViewModel(resolver.GetService<IUpdater>(), resolver.GetService<IUserSettings>()));
     }
 }

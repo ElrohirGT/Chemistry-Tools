@@ -2,7 +2,9 @@ using System;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
+using Chemistry_Tools.UserSettings;
 using Chemistry_Tools.Core.Updaters;
 
 using ReactiveUI;
@@ -11,6 +13,7 @@ namespace Chemistry_Tools.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private readonly IUpdater _updater;
+    private Theme[] _themes;
 
     public string Greeting => "Welcome to Avalonia!";
 
@@ -18,9 +21,20 @@ public class MainWindowViewModel : ViewModelBase
     public Interaction<IUpdater, bool> ShouldCancelDownload { get; } = new Interaction<IUpdater, bool>();
     public Interaction<Exception, Unit> ShowError { get; } = new Interaction<Exception, Unit>();
 
+    public ICommand ChangeThemeCommand { get; set; }
+    public Theme[] Themes
+    {
+        get => _themes;
+        private set => this.RaiseAndSetIfChanged(ref _themes, value);
+    }
+
     public event Action? Close;
 
-    public MainWindowViewModel(IUpdater updater) => _updater = updater;
+    public MainWindowViewModel(IUpdater updater, IUserSettings appSettings) : base(appSettings)
+    {
+        _updater = updater;
+        Themes = UserSettings.GetThemes();
+    }
 
     public override async Task OnOpened(EventArgs e)
     {
@@ -72,5 +86,9 @@ public class MainWindowViewModel : ViewModelBase
             _updater.CancelFileDownload();
     }
 
-    private void OnCloseApplication() => Close?.Invoke();
+    private void OnCloseApplication()
+    {
+        UserSettings.Save();
+        Close?.Invoke();
+    }
 }

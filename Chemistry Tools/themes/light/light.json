@@ -1,0 +1,7 @@
+{
+  "Name": "Light",
+  "Directory": "light",
+  "Resources": {
+    "Icon": "light/icon.png"
+  }
+}

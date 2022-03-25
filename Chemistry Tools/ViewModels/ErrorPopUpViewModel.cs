@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reactive;
 
+using Chemistry_Tools.UserSettings;
+
 using ReactiveUI;
 
 namespace Chemistry_Tools.ViewModels;
@@ -31,7 +33,7 @@ public class ErrorPopUpViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _fullErrorMessage, value);
     }
 
-    public ErrorPopUpViewModel()
+    public ErrorPopUpViewModel(IUserSettings userSettings) : base(userSettings)
     {
         CloseDialogCommand = ReactiveCommand.Create(OnWindowClosing);
         CopyErrorCommand = ReactiveCommand.Create<string>(s => TextCopy.ClipboardService.SetText(s));

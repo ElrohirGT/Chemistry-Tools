@@ -1,4 +1,5 @@
 ﻿using Chemistry_Tools.Core.Updaters;
+using Chemistry_Tools.UserSettings;
 
 using ReactiveUI;
 
@@ -14,5 +15,5 @@ public class UpdatePopUpViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _updateItem, value);
     }
 
-    public UpdatePopUpViewModel() => CloseDialogCommand = ReactiveCommand.Create<bool, bool>(v => v);
+    public UpdatePopUpViewModel(IUserSettings userSettings) : base(userSettings) => CloseDialogCommand = ReactiveCommand.Create<bool, bool>(v => v);
 }

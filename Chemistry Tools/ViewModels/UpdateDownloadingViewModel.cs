@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Chemistry_Tools.Core.Updaters;
+using Chemistry_Tools.UserSettings;
 
 using ReactiveUI;
 
@@ -35,7 +36,7 @@ public class UpdateDownloadingViewModel : ViewModelBase
 
     public ReactiveCommand<bool, bool>? CancelDownloadCommand { get; }
 
-    public UpdateDownloadingViewModel() => CancelDownloadCommand = ReactiveCommand.Create<bool, bool>(v => v);
+    public UpdateDownloadingViewModel(IUserSettings userSettings) : base(userSettings) => CancelDownloadCommand = ReactiveCommand.Create<bool, bool>(v => v);
 
     internal void ChangeProgress(float percentage)
         => DownloadProgress = percentage;

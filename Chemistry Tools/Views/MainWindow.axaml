@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="using:Chemistry_Tools.Controls"
+        xmlns:ui="using:FluentAvalonia.UI.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Chemistry_Tools.Views.MainWindow"
         WindowStartupLocation="CenterScreen"
@@ -17,14 +18,21 @@
     </Design.DataContext>
   <Panel Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}" Opacity="0.7">
     
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" RelativePanel.AlignLeftWithPanel="True">
-          <Image Source="/Assets/icon.png" Height="30" ClipToBounds="True"/>
-          <TextBlock Text="Chemistry Tools" VerticalAlignment="Center"/>
-        </StackPanel>
-        <Button>
-          <DrawingPresenter Height="20" Drawing="{DynamicResource FluentIconsFilled.clipboard_filled}"/>
-        </Button>
+    <DockPanel x:DataType="vm:MainWindowViewModel">
+      <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" RelativePanel.AlignLeftWithPanel="True">
+        <Image Source="/Assets/icon.png" Height="30" ClipToBounds="True"/>
+        <TextBlock Text="Chemistry Tools" VerticalAlignment="Center"/>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <ui:ComboBox Items="{Binding Themes}" SelectedItem="{Binding UserSettings.CurrentTheme}">
+          <ui:ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
+          </ui:ComboBox.ItemTemplate>
+        </ui:ComboBox>
+        <ui:ImageIcon Source="{Binding UserSettings.CurrentTheme.Resources.Icon.Image}"/>
+      </StackPanel>
     </DockPanel>
   </Panel>
 </Window>

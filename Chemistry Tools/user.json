@@ -1,0 +1,9 @@
+{
+	"CurrentTheme": {
+		"Name": "Dark",
+		"Resources": {
+			"Icon": "dark/icon.png"
+		},
+		"Directory": "dark"
+	}
+}
