@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:Chemistry_Tools.ViewModels"
         Width="350" Height="NaN"
         mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="NaN"
         x:Class="Chemistry_Tools.Views.PopUps.ErrorPopUpWindow"
@@ -9,10 +10,12 @@
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterOwner"
         Title="Error">
-  <StackPanel Orientation="Vertical" Spacing="5">
-    <TextBlock Text="Lo sentimos, ocurrió un error:" FontSize="20"/>
+  <StackPanel Orientation="Vertical" Spacing="5" x:DataType="vm:ErrorPopUpViewModel">
+    <TextBlock Text="{Binding UserSettings.CurrentLanguage.ApologyTitle}" FontSize="20"/>
     <TextBlock Text="{Binding Error}" Background="DarkGray" TextWrapping="Wrap"/>
     <Button Command="{Binding CopyErrorCommand}" CommandParameter="{Binding FullErrorMessage}" HorizontalAlignment="Center">Copiar al portapapeles</Button>
-    <Button Command="{Binding CloseDialogCommand}" HorizontalAlignment="Center">Close</Button>
+    <Button Command="{Binding CloseDialogCommand}" HorizontalAlignment="Center" Classes="Accent">
+      <TextBlock Text="{Binding UserSettings.CurrentLanguage.CloseButtonText}"/>
+    </Button>
   </StackPanel>
 </Window>

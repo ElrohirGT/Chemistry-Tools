@@ -24,7 +24,7 @@
         <TextBlock Text="Chemistry Tools" VerticalAlignment="Center"/>
       </StackPanel>
       <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-        <TextBlock Text="{Binding UserSettings.CurrentLanguage.ThemeConfigurationLabel}"/> 
+        <TextBlock Text="{Binding UserSettings.CurrentLanguage.ConfigurationWindow.ThemeConfigurationLabel}"/> 
         <ui:ComboBox Items="{Binding Themes}" SelectedItem="{Binding UserSettings.CurrentTheme}">
           <ui:ComboBox.ItemTemplate>
             <DataTemplate>
@@ -33,7 +33,7 @@
           </ui:ComboBox.ItemTemplate>
         </ui:ComboBox>
         
-        <TextBlock Text="{Binding UserSettings.CurrentLanguage.LanguageConfigurationLabel}"/>
+        <TextBlock Text="{Binding UserSettings.CurrentLanguage.ConfigurationWindow.LanguageConfigurationLabel}"/>
         <ui:ComboBox Items="{Binding Languages}" SelectedItem="{Binding UserSettings.CurrentLanguage}">
           <ui:ComboBox.ItemTemplate>
             <DataTemplate>

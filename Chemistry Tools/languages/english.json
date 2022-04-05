@@ -1,5 +1,23 @@
 {
 	"Name": "English",
-	"ThemeConfigurationLabel": "Theme:",
-	"LanguageConfigurationLabel": "Language:"
+	"ConfigurationWindow": {
+		"ThemeConfigurationLabel": "Theme:",
+		"LanguageConfigurationLabel": "Language:"
+	},
+	"ErrorPopUpWindow": {
+		"ApologyTitle": "We're sorry, an error has ocurred:",
+		"CloseButtonText": "Close"
+	},
+	"UpdateDownloadingWindow": {
+		"WindowTitle": "Downloading update...",
+		"CancelButtonText": "Cancel",
+		"AcceptButtonText": "Accept"
+	},
+	"UpdatePopUpWindow": {
+		"WindowTitle": "New version available!",
+		"CurrentVersionPrefix": "Current: ",
+		"NextVersionPrefix": "New: ",
+		"DownloadButtonText": "Download",
+		"OmitButtonText": "Omit"
+	}
 }

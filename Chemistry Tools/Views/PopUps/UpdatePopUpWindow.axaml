@@ -16,15 +16,22 @@
   <Design.DataContext>
     <vm:UpdatePopUpViewModel/>
   </Design.DataContext>
-  <StackPanel Orientation="Vertical">
+  <StackPanel Orientation="Vertical" x:DataType="vm:UpdatePopUpViewModel">
+      <TextBlock Text="{Binding UserSettings.CurrentLanguage.UpdatePopUpWindow.WindowTitle}" Classes="TitleTextBlockStyle"/>
     <StackPanel DataContext="{Binding UpdateItem}" Orientation="Vertical">
-      <TextBlock Text="Hay una nueva versión disponible!" FontSize="20"/>
-      <TextBlock Text="{Binding InstalledVersion, StringFormat=Actual: {0}}"/>
-      <TextBlock Text="{Binding UpdateVersion, StringFormat=Nueva: {0}}"/>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="{Binding InstalledVersion}"/>
+        <TextBlock Text=" -> "/>
+        <TextBlock Text="{Binding UpdateVersion}"/>
+      </StackPanel>
     </StackPanel>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource True}" IsEnabled="True">Descargar</Button>
-      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource False}" IsEnabled="True">Omitir</Button>
+      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource True}" IsEnabled="True">
+        <TextBlock Text="{Binding UserSettings.CurrentLanguage.UpdatePopUpWindow.DownloadButtonText}"/>
+      </Button>
+      <Button Command="{Binding CloseDialogCommand}" CommandParameter="{StaticResource False}" IsEnabled="True">
+        <TextBlock Text="{Binding UserSettings.CurrentLanguage.UpdatePopUpWindow.OmitButtonText}"/>
+      </Button>
     </StackPanel>
   </StackPanel>
 

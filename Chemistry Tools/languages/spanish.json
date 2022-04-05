@@ -1,5 +1,23 @@
 {
 	"Name": "Español",
-	"ThemeConfigurationLabel": "Tema:",
-	"LanguageConfigurationLabel": "Lenguaje:"
+	"ConfigurationWindow": {
+		"ThemeConfigurationLabel": "Tema:",
+		"LanguageConfigurationLabel": "Lenguaje:"
+	},
+	"ErrorPopUpWindow": {
+		"ApologyTitle": "Lo sentimos, ocurrió un error:",
+		"CloseButtonText": "Cerrar"
+	},
+	"UpdateDownloadingWindow": {
+		"WindowTitle": "Descargando Actualización...",
+		"CancelButtonText": "Cancelar",
+		"AcceptButtonText": "Aceptar"
+	},
+	"UpdatePopUpWindow": {
+		"WindowTitle": "Hay una nueva versión disponible!",
+		"CurrentVersionPrefix": "Actual: ",
+		"NextVersionPrefix": "Nueva: ",
+		"DownloadButtonText": "Descargar",
+		"OmitButtonText": "Omitir"
+	}
 }
