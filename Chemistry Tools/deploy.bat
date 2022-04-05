@@ -30,7 +30,7 @@ cd ../linux
 netsparkle-generate-appcast -n "Chemistry Tools" -f true -u https://chemistry-tools.netlify.app/linux/ --key-path "D:\elroh\Documents" -a . -o linux -e tar.gz
 
 echo [101;93m DONE [0m
-cd ../
+cd ../../
 echo "Opening the explorer..."
 explorer.exe .
 pause
