@@ -27,8 +27,8 @@ internal static class AppBootstrapper
         });
         services.RegisterLazySingleton<IUserSettings>(() => new FluentUserSettings().Parse());
         //TODO: Use the real updater
-        //services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
-        services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
+        services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
+        //services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
 
         services.Register(() => new ErrorPopUpViewModel(resolver.GetService<IUserSettings>()));
         services.Register(() => new UpdateDownloadingViewModel(resolver.GetService<IUserSettings>()));

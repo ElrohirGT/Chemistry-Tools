@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Chemistry Tools"
-#define MyAppVersion "0.0.0"
+#define MyAppVersion "0.0.1"
 #define MyAppPublisher "ElrohirGT"
 #define MyAppURL "https://github.com/ElrohirGT/Chemistry-Tools"
 #define MyAppExeName "Chemistry Tools.exe"
@@ -10,7 +10,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{8171BFB0-7281-4449-84E8-7DB47E8464E4}
+AppId={{55422F82-6C7D-4E88-AC39-DEBA2CC8D31B}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -24,6 +24,7 @@ LicenseFile=D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Che
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
+OutputDir=D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Output
 OutputBaseFilename=Chemistry Tools Installer
 SetupIconFile=D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Assets\icon.ico
 Compression=lzma
@@ -39,11 +40,16 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\languages\*"; DestDir: "{app}\languages"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\themes\*"; DestDir: "{app}\themes"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\Chemistry Tools.Core.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\Chemistry Tools.Infrastructure.pdb"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\Chemistry Tools.pdb"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\libHarfBuzzSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\libSkiaSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\libsodium.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\user.json"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -52,4 +58,3 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-

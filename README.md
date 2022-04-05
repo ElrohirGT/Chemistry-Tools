@@ -3,19 +3,21 @@ Some nifty tools for chemists. Inspired by [DevToys](https://github.com/veler/De
 
 Made with [Avalonia](https://github.com/AvaloniaUI/Avalonia) and [NetSparkle](https://github.com/NetSparkleUpdater/NetSparkle).
 
+Current version and release notes can be found on the [CHANGELOG](https://chemistry-tools.netlify.app/changelog.html).
+
 [GitHub](https://github.com/ElrohirGT/Chemistry-Tools/) [WebPage](https://chemistry-tools.netlify.app/) [Trello](https://trello.com/b/fFzjvGlI/chemistry-app)
 
 - [Chemistry-Tools](#chemistry-tools)
-  * [Downloads](#downloads)
-  * [Installation](#installation)
-  * [Updates](#updates)
-  * [Features and usage](#features-and-usage)
-  * [Attributions](#attributions)
+	* [Downloads](#downloads)
+	* [Installation](#installation)
+	* [Updates](#updates)
+	* [Features and usage](#features-and-usage)
+	* [Attributions](#attributions)
 
 ## Downloads
 The following links contain the downloads for the specified platforms:
 
-[Windows](https://chemistry-tools.netlify.app/windows/Chemistry%20Tools%20Installer.exe) [MacOS-x64](https://chemistry-tools.netlify.app/macos/Chemistry%20Tools%20%28OSX-x64%29%200.0.0.zip) [Linux](https://chemistry-tools.netlify.app/linux/Chemistry%20Tools%20%28Linux-x64%29%200.0.0.tar.gz)
+[Windows](https://chemistry-tools.netlify.app/windows/Chemistry%20Tools%20Installer.exe) [MacOS-x64](https://chemistry-tools.netlify.app/macos/Chemistry%20Tools%20%28OSX-x64%29%200.0.1.zip) [Linux](https://chemistry-tools.netlify.app/linux/Chemistry%20Tools%20%28Linux-x64%29%200.0.1.tar.gz)
 
 ## Installation
 * Installation in Windows is the easiest, you'll just need to run the installer, no other downloads required.
@@ -28,10 +30,14 @@ Updates are automatically downloaded to your system, although for the moment, th
 * MAC: The app will download the update and will open a folder where the uncompressed app is located, just move it to the Applications folder replacing the old version. You may delete the folder were the new version was.
 * LINUX: The app will download the update and will open up a terminal where the locations of the downloaded .tar.gz is. Repeat the same steps you did when installing the app.
 
-## Features and usage
-Currently none of the features are implemented.
+## Features
+- Dark, light and high contrast themes.
+- Spanish and english language implemented, with support to create a translation to any other language.
 
-Take a look at [Roadmap](#roadmap) to see what's in development!
+Take a look at the Trello above to see what's coming next!
+
+## Usage
+Currently the app does nothing but change themes and languages! Other features will come with time, you can support the project by giving it a star on github or checking out the Trello above to see what's in development!
 
 ## Attributions
 **App Icon:**

@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Chemistry Tools/Builds
 /Chemistry Tools/Output
+/Chemistry Tools/log.txt

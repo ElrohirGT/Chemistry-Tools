@@ -3,9 +3,12 @@ echo -e "\e[41mWebpage setup\e[0m"
 rm -rd Output/page/Assets
 mkdir Output/page/Assets
 markdown ../README.md > Output/page/index.html
+markdown ../CHANGELOG.md > Output/page/changelog.html
 cp Assets/icon.png Output/page/Assets
 sed -i '1i<head><title>Chemistry Tools</title><link rel="shortcut icon" href="Assets/icon.png" type="image/x-icon" /><link rel="stylesheet" href="styles.css" /></head><body><p><img src="Assets/icon.png" alt="App Icon" title="" /></p>' Output/page/index.html
+sed -i '1i<head><title>Chemistry Tools</title><link rel="shortcut icon" href="Assets/icon.png" type="image/x-icon" /><link rel="stylesheet" href="styles.css" /></head><body><p><img src="Assets/icon.png" alt="App Icon" title="" /></p>' Output/page/changelog.html
 echo '</body>' >> Output/page/index.html
+echo '</body>' >> Output/page/changelog.html
 echo -e "\e[41mDONE\e[0m"
 
 echo -e "\e[41mMac Compilation\e[0m"
