@@ -15,10 +15,7 @@ namespace Chemistry_Tools.JSONConverters
         readonly Type SECOND_TYPE = typeof(ImageContainer);
         readonly string BASE_PATH;
 
-        public BitmapConverter()
-        {
-            BASE_PATH = Path.Combine(Environment.CurrentDirectory, "themes");
-        }
+        public BitmapConverter() => BASE_PATH = Path.Combine(Environment.CurrentDirectory, "themes");
 
         public override bool CanConvert(Type typeToConvert) => typeToConvert == ACCEPTED_TYPE || typeToConvert == SECOND_TYPE;
 

@@ -10,11 +10,15 @@ public abstract class ViewModelBase : ReactiveObject
 {
     private IUserSettings _appSettings;
 
+    /// <summary>
+    /// Get's the current user settings used in the app.
+    /// </summary>
     public IUserSettings UserSettings
     {
         get => _appSettings;
         set => this.RaiseAndSetIfChanged(ref _appSettings, value);
     }
+
     /// <summary>
     /// Helps in the construction of a viewmodel. 
     /// </summary>

@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:vm="using:Chemistry_Tools.ViewModels"
+             xmlns:controls="using:Chemistry_Tools.CustomControls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chemistry_Tools.Views.ConfigurationView">
+  <DockPanel x:DataType="vm:ConfigurationViewModel">
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+      <TextBlock Text="{Binding UserSettings.CurrentLanguage.ConfigurationWindow.ThemeConfigurationLabel}"/>
+      <ui:ComboBox Items="{Binding Themes}" SelectedItem="{Binding UserSettings.CurrentTheme}">
+        <ui:ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}"/>
+          </DataTemplate>
+        </ui:ComboBox.ItemTemplate>
+      </ui:ComboBox>
+
+      <TextBlock Text="{Binding UserSettings.CurrentLanguage.ConfigurationWindow.LanguageConfigurationLabel}"/>
+      <ui:ComboBox Items="{Binding Languages}" SelectedItem="{Binding UserSettings.CurrentLanguage}">
+        <ui:ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}"/>
+          </DataTemplate>
+        </ui:ComboBox.ItemTemplate>
+      </ui:ComboBox>
+    </StackPanel>
+  </DockPanel>
+</UserControl>

@@ -19,6 +19,7 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
     private const string CONFIG_FILE_PATH = "user.json";
     private Language? _currentLanguage;
     private Theme? _currentTheme;
+    private bool _disposed;
 
     public FluentUserSettings() : base(CONFIG_FILE_PATH, OPTIONS)
     {
@@ -63,4 +64,23 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
 
     protected override Task _Save(FileStream fileStream) => JsonSerializer.SerializeAsync(fileStream, this, OPTIONS);
     IUserSettings? ISettings<IUserSettings>.Parse() => Parse();
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                CurrentTheme.Dispose();
+            }
+            _disposed = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
 }

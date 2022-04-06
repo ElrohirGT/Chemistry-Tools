@@ -1,7 +1,11 @@
 {
   "Name": "HighContrast",
+  "BaseTheme": "HighContrast",
   "Directory": "highcontrast",
   "Resources": {
-    "Icon": "highcontrast/icon.png"
+    "MainWindow": {
+      "HomeIcon": "highcontrast/home.png",
+      "SettingsIcon": "highcontrast/settings.png"
+    }
   }
 }

@@ -1,7 +1,11 @@
 {
   "Name": "Dark",
+  "BaseTheme": "Dark",
+  "Directory": "dark",
   "Resources": {
-    "Icon": "dark/icon.png"
-  },
-  "Directory": "dark"
+    "MainWindow": {
+      "HomeIcon": "dark/home.png",
+      "SettingsIcon": "dark/settings.png"
+    }
+  }
 }

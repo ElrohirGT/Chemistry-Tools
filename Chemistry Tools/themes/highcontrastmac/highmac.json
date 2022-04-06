@@ -1,0 +1,11 @@
+{
+  "Name": "HighContrast (Mac)",
+  "BaseTheme": "HighContrast",
+  "Directory": "highcontrastmac",
+  "Resources": {
+    "MainWindow": {
+      "HomeIcon": "highcontrastmac/home.png",
+      "SettingsIcon": "highcontrastmac/settings.png"
+    }
+  }
+}

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 using Chemistry_Tools.Core.Settings;
 
 namespace Chemistry_Tools.UserSettings;
-public interface IUserSettings : ISettings<IUserSettings>, INotifyPropertyChanged
+public interface IUserSettings : ISettings<IUserSettings>, INotifyPropertyChanged, IDisposable
 {
     /// <summary>
     /// Gets or sets the current theme of the application.

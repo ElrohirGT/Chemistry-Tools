@@ -7,6 +7,8 @@ using Chemistry_Tools.Infrastructure.UpdatesIntallers;
 using Chemistry_Tools.ViewModels;
 
 using Splat;
+using ReactiveUI;
+using Chemistry_Tools.Views;
 
 namespace Chemistry_Tools;
 
@@ -14,6 +16,7 @@ internal static class AppBootstrapper
 {
     internal static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
+        //Updaters
         services.Register(() =>
         {
             IUpdateInstaller? installer = null;
@@ -25,14 +28,21 @@ internal static class AppBootstrapper
                 installer = new OSXUpdateInstaller();
             return installer;
         });
-        services.RegisterLazySingleton<IUserSettings>(() => new FluentUserSettings().Parse());
         //TODO: Use the real updater
-        services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
-        //services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
+        //services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
+        services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
 
+        //Settings
+        services.RegisterLazySingleton<IUserSettings>(() => new FluentUserSettings().Parse());
+
+        //ViewModels
         services.Register(() => new ErrorPopUpViewModel(resolver.GetService<IUserSettings>()));
         services.Register(() => new UpdateDownloadingViewModel(resolver.GetService<IUserSettings>()));
         services.Register(() => new UpdatePopUpViewModel(resolver.GetService<IUserSettings>()));
         services.Register(() => new MainWindowViewModel(resolver.GetService<IUpdater>(), resolver.GetService<IUserSettings>()));
+
+        //Routes
+        services.Register<IViewFor<ConfigurationViewModel>>(() => new ConfigurationView());
+        services.Register<IViewFor<HomeViewModel>>(() => new HomeView());
     }
 }

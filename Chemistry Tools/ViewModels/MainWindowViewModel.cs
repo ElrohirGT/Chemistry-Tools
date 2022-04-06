@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 using Chemistry_Tools.UserSettings;
 using Chemistry_Tools.Core.Updaters;
@@ -11,37 +9,25 @@ using Chemistry_Tools.Core.Updaters;
 using ReactiveUI;
 
 namespace Chemistry_Tools.ViewModels;
-public class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase, IScreen
 {
     private readonly IUpdater _updater;
-    private Theme[] _themes;
-    private Language[] _languages;
-
-    public string Greeting => "Welcome to Avalonia!";
 
     public Interaction<UpdateItem, bool> ShouldUpdateInteraction { get; } = new Interaction<UpdateItem, bool>();
     public Interaction<IUpdater, bool> ShouldCancelDownload { get; } = new Interaction<IUpdater, bool>();
     public Interaction<Exception, Unit> ShowError { get; } = new Interaction<Exception, Unit>();
+    public ReactiveCommand<Unit, IRoutableViewModel> GoToConfigurationCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> GoHome { get; }
 
-    public ICommand ChangeThemeCommand { get; set; }
-    public Theme[] Themes
-    {
-        get => _themes;
-        private set => this.RaiseAndSetIfChanged(ref _themes, value);
-    }
-    public Language[] Languages
-    {
-        get => _languages;
-        private set => this.RaiseAndSetIfChanged(ref _languages, value);
-    }
+    public RoutingState Router { get; } = new RoutingState();
 
     public event Action? Close;
 
     public MainWindowViewModel(IUpdater updater, IUserSettings appSettings) : base(appSettings)
     {
         _updater = updater;
-        Themes = UserSettings.GetThemes();
-        Languages = UserSettings.GetLanguages();
+        GoHome = ReactiveCommand.CreateFromObservable(() => Router.NavigateAndReset.Execute(new HomeViewModel(appSettings, this)));
+        GoToConfigurationCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new ConfigurationViewModel(appSettings, this)));
     }
 
     public override async Task OnOpened(EventArgs e)
@@ -98,6 +84,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         await base.OnClosed(e);
         await UserSettings.Save();
+        UserSettings.Dispose();
     }
 
     private void OnCloseApplication() => Close?.Invoke();

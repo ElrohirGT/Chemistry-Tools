@@ -1,7 +1,11 @@
 {
   "Name": "Light",
+  "BaseTheme": "Light",
   "Directory": "light",
   "Resources": {
-    "Icon": "light/icon.png"
+    "MainWindow": {
+      "HomeIcon": "light/home.png",
+      "SettingsIcon": "light/settings.png"
+    }
   }
 }

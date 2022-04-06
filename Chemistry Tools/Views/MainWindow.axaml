@@ -1,11 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Chemistry_Tools.ViewModels"
+        xmlns:ctrls="using:Chemistry_Tools.CustomControls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="using:Chemistry_Tools.Controls"
+        xmlns:rxui="using:Avalonia.ReactiveUI"
         xmlns:ui="using:FluentAvalonia.UI.Controls"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Chemistry_Tools.Views.MainWindow"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/icon.ico"
@@ -13,36 +13,18 @@
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
   <Panel Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}" Opacity="0.7">
-    
     <DockPanel x:DataType="vm:MainWindowViewModel">
-      <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" RelativePanel.AlignLeftWithPanel="True">
-        <Image Source="/Assets/icon.png" Height="30" ClipToBounds="True"/>
-        <TextBlock Text="Chemistry Tools" VerticalAlignment="Center"/>
-      </StackPanel>
+      <ctrls:ApplicationHeader DockPanel.Dock="Top"/>
       <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-        <TextBlock Text="{Binding UserSettings.CurrentLanguage.ConfigurationWindow.ThemeConfigurationLabel}"/> 
-        <ui:ComboBox Items="{Binding Themes}" SelectedItem="{Binding UserSettings.CurrentTheme}">
-          <ui:ComboBox.ItemTemplate>
-            <DataTemplate>
-              <TextBlock Text="{Binding Name}"/>
-            </DataTemplate>
-          </ui:ComboBox.ItemTemplate>
-        </ui:ComboBox>
-        
-        <TextBlock Text="{Binding UserSettings.CurrentLanguage.ConfigurationWindow.LanguageConfigurationLabel}"/>
-        <ui:ComboBox Items="{Binding Languages}" SelectedItem="{Binding UserSettings.CurrentLanguage}">
-          <ui:ComboBox.ItemTemplate>
-            <DataTemplate>
-              <TextBlock Text="{Binding Name}"/>
-            </DataTemplate>
-          </ui:ComboBox.ItemTemplate>
-        </ui:ComboBox>
+        <ui:Button Command="{Binding GoHome}">
+          <ui:ImageIcon Width="50" Height="50" Source="{Binding UserSettings.CurrentTheme.Resources.MainWindow.HomeIcon.Image}"/>
+        </ui:Button>
+        <Button Command="{Binding GoToConfigurationCommand}">
+          <ui:ImageIcon Width="50" Height="50" Source="{Binding UserSettings.CurrentTheme.Resources.MainWindow.SettingsIcon.Image}"/>
+        </Button>
       </StackPanel>
-      <ui:ImageIcon Width="200" Height="200" Source="{Binding UserSettings.CurrentTheme.Resources.Icon.Image}"/>
+      <rxui:RoutedViewHost Router="{Binding Router}" />
     </DockPanel>
   </Panel>
 </Window>

@@ -1,32 +1,36 @@
 {
-	"CurrentTheme": {
-		"Name": "Dark",
-		"Resources": {
-			"Icon": "dark/icon.png"
-		},
-		"Directory": "dark"
-	},
-	"CurrentLanguage": {
-		"Name": "Español",
-		"ConfigurationWindow": {
-			"ThemeConfigurationLabel": "Tema:",
-			"LanguageConfigurationLabel": "Lenguaje:"
-		},
-		"ErrorPopUpWindow": {
-			"ApologyTitle": "Lo sentimos, ocurrió un error:",
-			"CloseButtonText": "Cerrar"
-		},
-		"UpdateDownloadingWindow": {
-			"WindowTitle": "Descargando Actualización...",
-			"CancelButtonText": "Cancelar",
-			"AcceptButtonText": "Aceptar"
-		},
-		"UpdatePopUpWindow": {
-			"WindowTitle": "Hay una nueva versión disponible!",
-			"CurrentVersionPrefix": "Actual: ",
-			"NextVersionPrefix": "Nueva: ",
-			"DownloadButtonText": "Descargar",
-			"OmitButtonText": "Omitir"
-		}
-	}
+  "CurrentTheme": {
+    "Name": "Dark",
+    "BaseTheme": "Dark",
+    "Directory": "dark",
+    "Resources": {
+      "MainWindow": {
+        "HomeIcon": "dark/home.png",
+        "SettingsIcon": "dark/settings.png"
+      }
+    }
+  },
+  "CurrentLanguage": {
+    "Name": "Español",
+    "ConfigurationWindow": {
+      "ThemeConfigurationLabel": "Tema:",
+      "LanguageConfigurationLabel": "Lenguaje:"
+    },
+    "ErrorPopUpWindow": {
+      "ApologyTitle": "Lo sentimos, ocurrió un error:",
+      "CloseButtonText": "Cerrar"
+    },
+    "UpdateDownloadingWindow": {
+      "WindowTitle": "Descargando Actualización...",
+      "CancelButtonText": "Cancelar",
+      "AcceptButtonText": "Aceptar"
+    },
+    "UpdatePopUpWindow": {
+      "WindowTitle": "Hay una nueva versión disponible!",
+      "CurrentVersionPrefix": "Actual: ",
+      "NextVersionPrefix": "Nueva: ",
+      "DownloadButtonText": "Descargar",
+      "OmitButtonText": "Omitir"
+    }
+  }
 }
