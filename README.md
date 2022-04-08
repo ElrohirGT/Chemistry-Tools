@@ -17,7 +17,7 @@ Current version and release notes can be found on the [CHANGELOG](https://chemis
 ## Downloads
 The following links contain the downloads for the specified platforms:
 
-[Windows](https://chemistry-tools.netlify.app/windows/Chemistry%20Tools%20Installer.exe) [MacOS-x64](https://chemistry-tools.netlify.app/macos/Chemistry%20Tools%20%28OSX-x64%29%200.0.1.zip) [Linux](https://chemistry-tools.netlify.app/linux/Chemistry%20Tools%20%28Linux-x64%29%200.0.1.tar.gz)
+[Windows](https://chemistry-tools.netlify.app/windows/Chemistry%20Tools%20Installer.exe) [MacOS-x64](https://chemistry-tools.netlify.app/macos/Chemistry%20Tools%20%28OSX-x64%29%200.0.2.zip) [Linux](https://chemistry-tools.netlify.app/linux/Chemistry%20Tools%20%28Linux-x64%29%200.0.2.tar.gz)
 
 ## Installation
 * Installation in Windows is the easiest, you'll just need to run the installer, no other downloads required.
