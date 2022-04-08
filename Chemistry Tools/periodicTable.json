@@ -1,0 +1,356 @@
+{
+  "H": {
+    "MolarMass": 1.008
+  },
+  "He": {
+    "MolarMass": 4.0026
+  },
+  "Li": {
+    "MolarMass": 6.94
+  },
+  "Be": {
+    "MolarMass": 9.0122
+  },
+  "B": {
+    "MolarMass": 10.81
+  },
+  "C": {
+    "MolarMass": 12.011
+  },
+  "N": {
+    "MolarMass": 14.007
+  },
+  "O": {
+    "MolarMass": 15.999
+  },
+  "F": {
+    "MolarMass": 18.998
+  },
+  "Ne": {
+    "MolarMass": 20.180
+  },
+  "Na": {
+    "MolarMass": 22.990
+  },
+  "Mg": {
+    "MolarMass": 24.305
+  },
+  "Al": {
+    "MolarMass": 26.982
+  },
+  "Si": {
+    "MolarMass": 28.085
+  },
+  "P": {
+    "MolarMass": 30.974
+  },
+  "S": {
+    "MolarMass": 32.06
+  },
+  "Cl": {
+    "MolarMass": 35.45
+  },
+  "Ar": {
+    "MolarMass": 39.948
+  },
+  "K": {
+    "MolarMass": 39.098
+  },
+  "Ca": {
+    "MolarMass": 40.078
+  },
+  "Sc": {
+    "MolarMass": 44.956
+  },
+  "Ti": {
+    "MolarMass": 47.867
+  },
+  "V": {
+    "MolarMass": 50.942
+  },
+  "Cr": {
+    "MolarMass": 51.996
+  },
+  "Mn": {
+    "MolarMass": 54.938
+  },
+  "Fe": {
+    "MolarMass": 55.845
+  },
+  "Co": {
+    "MolarMass": 58.933
+  },
+  "Ni": {
+    "MolarMass": 58.693
+  },
+  "Cu": {
+    "MolarMass": 63.546
+  },
+  "Zn": {
+    "MolarMass": 65.38
+  },
+  "Ga": {
+    "MolarMass": 69.723
+  },
+  "Ge": {
+    "MolarMass": 72.630
+  },
+  "As": {
+    "MolarMass": 74.922
+  },
+  "Se": {
+    "MolarMass": 78.971
+  },
+  "Br": {
+    "MolarMass": 79.904
+  },
+  "Kr": {
+    "MolarMass": 83.798
+  },
+  "Rb": {
+    "MolarMass": 85.468
+  },
+  "Sr": {
+    "MolarMass": 87.62
+  },
+  "Y": {
+    "MolarMass": 88.906
+  },
+  "Zr": {
+    "MolarMass": 91.224
+  },
+  "Nb": {
+    "MolarMass": 92.906
+  },
+  "Mo": {
+    "MolarMass": 95.95
+  },
+  "Tc": {
+    "MolarMass": 98
+  },
+  "Ru": {
+    "MolarMass": 101.07
+  },
+  "Rh": {
+    "MolarMass": 102.91
+  },
+  "Pd": {
+    "MolarMass": 106.42
+  },
+  "Ag": {
+    "MolarMass": 107.87
+  },
+  "Cd": {
+    "MolarMass": 112.41
+  },
+  "In": {
+    "MolarMass": 114.82
+  },
+  "Sn": {
+    "MolarMass": 118.71
+  },
+  "Sb": {
+    "MolarMass": 121.76
+  },
+  "Te": {
+    "MolarMass": 127.60
+  },
+  "I": {
+    "MolarMass": 126.90
+  },
+  "Xe": {
+    "MolarMass": 131.29
+  },
+  "Cs": {
+    "MolarMass": 132.91
+  },
+  "Ba": {
+    "MolarMass": 137.33
+  },
+  "La": {
+    "MolarMass": 138.91
+  },
+  "Ce": {
+    "MolarMass": 140.12
+  },
+  "Pr": {
+    "MolarMass": 140.91
+  },
+  "Nd": {
+    "MolarMass": 144.24
+  },
+  "Pm": {
+    "MolarMass": 145
+  },
+  "Sm": {
+    "MolarMass": 150.36
+  },
+  "Eu": {
+    "MolarMass": 151.96
+  },
+  "Gd": {
+    "MolarMass": 157.25
+  },
+  "Tb": {
+    "MolarMass": 158.93
+  },
+  "Dy": {
+    "MolarMass": 162.50
+  },
+  "Ho": {
+    "MolarMass": 164.93
+  },
+  "Er": {
+    "MolarMass": 167.26
+  },
+  "Tm": {
+    "MolarMass": 168.93
+  },
+  "Yb": {
+    "MolarMass": 173.05
+  },
+  "Lu": {
+    "MolarMass": 174.97
+  },
+  "Hf": {
+    "MolarMass": 178.49
+  },
+  "Ta": {
+    "MolarMass": 180.95
+  },
+  "W": {
+    "MolarMass": 183.84
+  },
+  "Re": {
+    "MolarMass": 186.21
+  },
+  "Os": {
+    "MolarMass": 190.23
+  },
+  "Ir": {
+    "MolarMass": 192.22
+  },
+  "Pt": {
+    "MolarMass": 195.08
+  },
+  "Au": {
+    "MolarMass": 196.97
+  },
+  "Hg": {
+    "MolarMass": 200.59
+  },
+  "Tl": {
+    "MolarMass": 204.38
+  },
+  "Pb": {
+    "MolarMass": 207.2
+  },
+  "Bi": {
+    "MolarMass": 208.98
+  },
+  "Po": {
+    "MolarMass": 209
+  },
+  "At": {
+    "MolarMass": 210
+  },
+  "Rn": {
+    "MolarMass": 222
+  },
+  "Fr": {
+    "MolarMass": 223
+  },
+  "Ra": {
+    "MolarMass": 226
+  },
+  "Ac": {
+    "MolarMass": 227
+  },
+  "Th": {
+    "MolarMass": 232.04
+  },
+  "Pa": {
+    "MolarMass": 231.04
+  },
+  "U": {
+    "MolarMass": 238.03
+  },
+  "Np": {
+    "MolarMass": 237
+  },
+  "Pu": {
+    "MolarMass": 244
+  },
+  "Am": {
+    "MolarMass": 243
+  },
+  "Cm": {
+    "MolarMass": 247
+  },
+  "Bk": {
+    "MolarMass": 247
+  },
+  "Cf": {
+    "MolarMass": 251
+  },
+  "Es": {
+    "MolarMass": 252
+  },
+  "Fm": {
+    "MolarMass": 257
+  },
+  "Md": {
+    "MolarMass": 258
+  },
+  "No": {
+    "MolarMass": 259
+  },
+  "Lr": {
+    "MolarMass": 266
+  },
+  "Rf": {
+    "MolarMass": 267
+  },
+  "Db": {
+    "MolarMass": 268
+  },
+  "Sg": {
+    "MolarMass": 269
+  },
+  "Bh": {
+    "MolarMass": 270
+  },
+  "Hs": {
+    "MolarMass": 277
+  },
+  "Mt": {
+    "MolarMass": 278
+  },
+  "Ds": {
+    "MolarMass": 281
+  },
+  "Rg": {
+    "MolarMass": 282
+  },
+  "Cn": {
+    "MolarMass": 285
+  },
+  "Nh": {
+    "MolarMass": 286
+  },
+  "Fl": {
+    "MolarMass": 289
+  },
+  "Mc": {
+    "MolarMass": 290
+  },
+  "Lv": {
+    "MolarMass": 293
+  },
+  "Ts": {
+    "MolarMass": 294
+  },
+  "Og": {
+    "MolarMass": 294
+  }
+}

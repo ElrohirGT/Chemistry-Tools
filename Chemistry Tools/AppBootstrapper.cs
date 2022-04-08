@@ -34,7 +34,7 @@ internal static class AppBootstrapper
         //services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
         services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
 
-        services.RegisterLazySingleton<IPeriodicTableService>(() => new PeriodicTable());
+        services.RegisterLazySingleton<IPeriodicTableService>(() => new PeriodicTableService());
 
         //Settings
         services.RegisterLazySingleton<IUserSettings>(() => new FluentUserSettings().Parse());

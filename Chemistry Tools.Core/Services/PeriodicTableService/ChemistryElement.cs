@@ -8,4 +8,5 @@ namespace Chemistry_Tools.Core.Services.PeriodicTableService;
 public class ChemistryElement
 {
     public decimal MolarMass { get; set; }
+    public decimal Quantity { get; set; }
 }

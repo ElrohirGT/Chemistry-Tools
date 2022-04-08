@@ -7,5 +7,5 @@ public class MolCalculatorWindowLanguage
     public string TextBoxWatermark { get; set; }
     public string MainActionButton { get; set; }
     public string ParseMoleculeErrorMessage { get; set; }
-    public string SuccessMessageFormat { get; internal set; }
+    public string SuccessMessageFormat { get; set; }
 }

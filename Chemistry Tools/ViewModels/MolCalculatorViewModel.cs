@@ -12,9 +12,9 @@ namespace Chemistry_Tools.ViewModels;
 public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWindowLanguage, object>, IRoutableViewModel
 {
     private string? _textBoxText;
-    private IPeriodicTableService _periodicTable;
+    private readonly IPeriodicTableService _periodicTable;
     private string? _errorMessage;
-    private string _successMessage;
+    private string? _successMessage;
 
     public ReactiveCommand<string, Unit> Calculate { get; }
     public string? ErrorMessage
@@ -22,7 +22,7 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
         get => _errorMessage;
         set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
     }
-    public string SuccessMessage
+    public string? SuccessMessage
     {
         get => _successMessage;
         set => this.RaiseAndSetIfChanged(ref _successMessage, value);
@@ -44,12 +44,13 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
     {
         if (!_periodicTable.TryParseMolecule(textMolecule, out ChemistryElement[] elements))
         {
+            SuccessMessage = null;
             ErrorMessage = CurrentWindowLanguage?.ParseMoleculeErrorMessage;
         }
         else
         {
             ErrorMessage = null;
-            decimal sum = elements.Sum((e) => e.MolarMass);
+            decimal sum = elements.Sum((e) => e.MolarMass * e.Quantity);
             SuccessMessage = string.Format(CurrentWindowLanguage?.SuccessMessageFormat ?? string.Empty, sum);
         }
     }

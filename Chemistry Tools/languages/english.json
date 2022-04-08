@@ -28,6 +28,8 @@
 	"MolCalculatorWindow": {
 		"Title": "g/mol Calculator",
 		"TextBoxWatermark": "Example: H2O",
-		"MainActionButton": "Calculate"
+		"MainActionButton": "Calculate",
+		"ParseMoleculeErrorMessage": "Please write a valid molecule!",
+		"SuccessMessageFormat": "The molecule has a weight of {0} g/mol."
 	}
 }
