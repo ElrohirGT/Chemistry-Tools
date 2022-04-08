@@ -50,6 +50,7 @@ Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemis
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\libsodium.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\user.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\elroh\Documents\Developer\Desktop Development\Chemistry Tools\Chemistry Tools\Builds\Chemistry Tools (WIN-x64)\periodicTable.json"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
