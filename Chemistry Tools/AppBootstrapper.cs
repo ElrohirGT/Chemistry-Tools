@@ -31,8 +31,8 @@ internal static class AppBootstrapper
             return installer;
         });
         //TODO: Use the real updater
-        //services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
-        services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
+        services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
+        //services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
 
         services.RegisterLazySingleton<IPeriodicTableService>(() => new PeriodicTableService());
 
