@@ -9,6 +9,8 @@ using Chemistry_Tools.ViewModels;
 using Splat;
 using ReactiveUI;
 using Chemistry_Tools.Views;
+using Chemistry_Tools.Core.Services.PeriodicTableService;
+using Chemistry_Tools.Infrastructure.Services;
 
 namespace Chemistry_Tools;
 
@@ -32,6 +34,8 @@ internal static class AppBootstrapper
         //services.Register<IUpdater>(() => new Updater(resolver.GetService<IUpdateInstaller>()));
         services.Register<IUpdater>(() => new TestUpdater(resolver.GetService<IUpdateInstaller>()));
 
+        services.RegisterLazySingleton<IPeriodicTableService>(() => new PeriodicTable());
+
         //Settings
         services.RegisterLazySingleton<IUserSettings>(() => new FluentUserSettings().Parse());
 
@@ -42,8 +46,9 @@ internal static class AppBootstrapper
         services.Register(() => new MainWindowViewModel(resolver.GetService<IUpdater>(), resolver.GetService<IUserSettings>()));
 
         //Routes
-        services.Register<IViewFor<ConfigurationViewModel>>(() => new ConfigurationView());
-        services.Register<IViewFor<HomeViewModel>>(() => new HomeView());
-        services.Register<IViewFor<MolCalculatorViewModel>>(() => new MolCalculatorView());
+        services.RegisterViewsForViewModels(typeof(AppBootstrapper).Assembly);
+        //services.Register<IViewFor<ConfigurationViewModel>>(() => new ConfigurationView());
+        //services.Register<IViewFor<HomeViewModel>>(() => new HomeView());
+        //services.Register<IViewFor<MolCalculatorViewModel>>(() => new MolCalculatorView());
     }
 }

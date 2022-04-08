@@ -9,6 +9,8 @@ using Chemistry_Tools.Core.Updaters;
 using ReactiveUI;
 using Chemistry_Tools.UserSettings.WindowsLanguage;
 using Chemistry_Tools.UserSettings.WindowsResources;
+using Splat;
+using Chemistry_Tools.Core.Services.PeriodicTableService;
 
 namespace Chemistry_Tools.ViewModels;
 public class MainWindowViewModel : BaseViewModelWithResources<MainWindowLanguage, MainWindowResources>, IScreen
@@ -30,7 +32,7 @@ public class MainWindowViewModel : BaseViewModelWithResources<MainWindowLanguage
     {
         _updater = updater;
         GoHome = ReactiveCommand.CreateFromObservable(() => Router.NavigateAndReset.Execute(new HomeViewModel(appSettings, this)));
-        GoToMolCalculator = ReactiveCommand.CreateFromObservable(()=> Router.Navigate.Execute(new MolCalculatorViewModel(appSettings, this)));
+        GoToMolCalculator = ReactiveCommand.CreateFromObservable(()=> Router.Navigate.Execute(new MolCalculatorViewModel(appSettings, this, Locator.Current.GetService<IPeriodicTableService>())));
         GoToConfigurationCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new ConfigurationViewModel(appSettings, this)));
     }
 

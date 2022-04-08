@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Reactive;
 
+using Chemistry_Tools.Core.Services.PeriodicTableService;
 using Chemistry_Tools.UserSettings;
 using Chemistry_Tools.UserSettings.WindowsLanguage;
 
@@ -10,23 +12,46 @@ namespace Chemistry_Tools.ViewModels;
 public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWindowLanguage, object>, IRoutableViewModel
 {
     private string? _textBoxText;
+    private IPeriodicTableService _periodicTable;
+    private string? _errorMessage;
+    private string _successMessage;
 
     public ReactiveCommand<string, Unit> Calculate { get; }
+    public string? ErrorMessage
+    {
+        get => _errorMessage;
+        set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
+    }
+    public string SuccessMessage
+    {
+        get => _successMessage;
+        set => this.RaiseAndSetIfChanged(ref _successMessage, value);
+    }
     public string? TextBoxText
     {
         get => _textBoxText;
         set => this.RaiseAndSetIfChanged(ref _textBoxText, value);
     }
-    public MolCalculatorViewModel(IUserSettings appSettings, IScreen hostScreen) : base(appSettings)
+    public MolCalculatorViewModel(IUserSettings appSettings, IScreen hostScreen, IPeriodicTableService periodicTable) : base(appSettings)
     {
         HostScreen = hostScreen;
-        var canExecute = this.WhenAnyValue(x => x.TextBoxText, (s) => !string.IsNullOrEmpty(s));
+        IObservable<bool>? canExecute = this.WhenAnyValue(x => x.TextBoxText, (s) => !string.IsNullOrEmpty(s));
         Calculate = ReactiveCommand.Create<string>(CalculateMolOf, canExecute);
+        _periodicTable = periodicTable;
     }
 
     private void CalculateMolOf(string textMolecule)
     {
-
+        if (!_periodicTable.TryParseMolecule(textMolecule, out ChemistryElement[] elements))
+        {
+            ErrorMessage = CurrentWindowLanguage?.ParseMoleculeErrorMessage;
+        }
+        else
+        {
+            ErrorMessage = null;
+            decimal sum = elements.Sum((e) => e.MolarMass);
+            SuccessMessage = string.Format(CurrentWindowLanguage?.SuccessMessageFormat ?? string.Empty, sum);
+        }
     }
 
     public string? UrlPathSegment { get; } = Guid.NewGuid().ToString()[..5];
