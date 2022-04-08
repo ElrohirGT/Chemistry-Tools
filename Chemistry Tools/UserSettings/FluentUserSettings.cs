@@ -21,6 +21,9 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
     private Theme? _currentTheme;
     private bool _disposed;
 
+    public event Action<Theme?>? ThemeChanged;
+    public event Action<Language?>? LanguageChanged;
+
     public FluentUserSettings() : base(CONFIG_FILE_PATH, OPTIONS)
     {
     }
@@ -30,7 +33,10 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
         get => _currentTheme;
         set
         {
-            RaiseIfPropertyChanged(ref _currentTheme, value);
+            Action<Theme?>? action = null;
+            if (ThemeChanged is not null)
+                action = ThemeChanged.Invoke;
+            RaiseIfPropertyChanged(ref _currentTheme, value, doIfChanged: action);
             _currentTheme?.Apply();
         }
     }
@@ -38,7 +44,13 @@ public class FluentUserSettings : SettingsBase<FluentUserSettings>, IUserSetting
     public Language? CurrentLanguage
     {
         get => _currentLanguage;
-        set => RaiseIfPropertyChanged(ref _currentLanguage, value);
+        set
+        {
+            Action<Language?>? action = null;
+            if (LanguageChanged is not null)
+                action = LanguageChanged.Invoke;
+            RaiseIfPropertyChanged(ref _currentLanguage, value, doIfChanged: action);
+        }
     }
 
     public Language[] GetLanguages() => ExtractFromFiles<Language>("languages");

@@ -2,11 +2,12 @@
 
 using Chemistry_Tools.Core.Updaters;
 using Chemistry_Tools.UserSettings;
+using Chemistry_Tools.UserSettings.WindowsLanguage;
 
 using ReactiveUI;
 
 namespace Chemistry_Tools.ViewModels;
-public class UpdateDownloadingViewModel : ViewModelBase
+public class UpdateDownloadingViewModel : BaseViewModelWithResources<UpdateDownloadingWindowLanguage, object>
 {
     private double _downloadProgress;
     private string? _downloadError;
@@ -44,4 +45,6 @@ public class UpdateDownloadingViewModel : ViewModelBase
     internal void UpdateFinished(string path) => CancelDownloadCommand?.Execute(false);
     internal void DownloadHadError(UpdateItem item, Exception exception)
         => DownloadError = $"Error downloading {item.Title}\n{exception.Message}";
+    protected override UpdateDownloadingWindowLanguage? GetCurrentWindowLanguage(Language? currentLanguage) => currentLanguage?.UpdateDownloadingWindow;
+    protected override object? GetCurrentWindowResources(Resources? currentResources) => null;
 }

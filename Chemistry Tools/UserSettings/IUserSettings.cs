@@ -17,6 +17,9 @@ public interface IUserSettings : ISettings<IUserSettings>, INotifyPropertyChange
     /// </summary>
     Language? CurrentLanguage { get; set; }
 
+    event Action<Theme?>? ThemeChanged;
+    event Action<Language?>? LanguageChanged;
+
     /// <summary>
     /// Gets all the themes avaliable to the application.
     /// </summary>

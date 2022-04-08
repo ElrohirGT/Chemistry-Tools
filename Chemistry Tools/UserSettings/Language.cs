@@ -10,6 +10,8 @@ public sealed class Language : IEquatable<Language>
     /// Represents the name of the language. This value must be unique.
     /// </summary>
     public string Name { get; set; }
+    public MainWindowLanguage MainWindow { get; set; }
+    public MolCalculatorWindowLanguage MolCalculatorWindow { get; set; }
     public ConfigurationWindowLanguage ConfigurationWindow { get; set; }
     public UpdatePopUpWindowLanguage UpdatePopUpWindow { get; set; }
     public UpdateDownloadingWindowLanguage UpdateDownloadingWindow { get; set; }

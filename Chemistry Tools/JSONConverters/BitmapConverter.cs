@@ -28,8 +28,9 @@ namespace Chemistry_Tools.JSONConverters
             path = Path.Combine(BASE_PATH, path);
             if (!File.Exists(path))
                 return null;
-            
-            var bitmap = new Bitmap(path);
+
+            using var imageStream = File.OpenRead(path);
+            var bitmap = Bitmap.DecodeToWidth(imageStream, 64);
             return new ImageContainer(path, bitmap);
         }
 

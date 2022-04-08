@@ -1,11 +1,12 @@
 ﻿using System;
 
 using Chemistry_Tools.UserSettings;
+using Chemistry_Tools.UserSettings.WindowsLanguage;
 
 using ReactiveUI;
 
 namespace Chemistry_Tools.ViewModels;
-public class ConfigurationViewModel : ViewModelBase, IRoutableViewModel
+public class ConfigurationViewModel : BaseViewModelWithResources<ConfigurationWindowLanguage, object>, IRoutableViewModel
 {
     private Theme[] _themes = Array.Empty<Theme>();
     private Language[] _languages = Array.Empty<Language>();
@@ -30,7 +31,16 @@ public class ConfigurationViewModel : ViewModelBase, IRoutableViewModel
         private set => this.RaiseAndSetIfChanged(ref _themes, value);
     }
 
-    internal void SaveData() => UserSettings.Save().Wait();
+    internal void SaveData()
+    {
+        UserSettings.Save().Wait();
+        foreach (var theme in Themes)
+            if (theme != UserSettings.CurrentTheme)
+                theme.Dispose();
+    }
+
+    protected override ConfigurationWindowLanguage? GetCurrentWindowLanguage(Language? currentLanguage) => currentLanguage?.ConfigurationWindow;
+    protected override object? GetCurrentWindowResources(Resources? currentResources) => null;
 
     public Language[] Languages
     {
@@ -38,6 +48,6 @@ public class ConfigurationViewModel : ViewModelBase, IRoutableViewModel
         private set => this.RaiseAndSetIfChanged(ref _languages, value);
     }
 
-    public string? UrlPathSegment { get; } = Guid.NewGuid().ToString().Substring(0, 5);
+    public string? UrlPathSegment { get; } = Guid.NewGuid().ToString()[..5];
     public IScreen HostScreen { get; }
 }

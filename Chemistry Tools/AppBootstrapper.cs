@@ -44,5 +44,6 @@ internal static class AppBootstrapper
         //Routes
         services.Register<IViewFor<ConfigurationViewModel>>(() => new ConfigurationView());
         services.Register<IViewFor<HomeViewModel>>(() => new HomeView());
+        services.Register<IViewFor<MolCalculatorViewModel>>(() => new MolCalculatorView());
     }
 }

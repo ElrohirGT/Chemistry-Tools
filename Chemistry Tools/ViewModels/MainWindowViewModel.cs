@@ -7,9 +7,11 @@ using Chemistry_Tools.UserSettings;
 using Chemistry_Tools.Core.Updaters;
 
 using ReactiveUI;
+using Chemistry_Tools.UserSettings.WindowsLanguage;
+using Chemistry_Tools.UserSettings.WindowsResources;
 
 namespace Chemistry_Tools.ViewModels;
-public class MainWindowViewModel : ViewModelBase, IScreen
+public class MainWindowViewModel : BaseViewModelWithResources<MainWindowLanguage, MainWindowResources>, IScreen
 {
     private readonly IUpdater _updater;
 
@@ -17,6 +19,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     public Interaction<IUpdater, bool> ShouldCancelDownload { get; } = new Interaction<IUpdater, bool>();
     public Interaction<Exception, Unit> ShowError { get; } = new Interaction<Exception, Unit>();
     public ReactiveCommand<Unit, IRoutableViewModel> GoToConfigurationCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> GoToMolCalculator { get; set; }
     public ReactiveCommand<Unit, IRoutableViewModel> GoHome { get; }
 
     public RoutingState Router { get; } = new RoutingState();
@@ -27,6 +30,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     {
         _updater = updater;
         GoHome = ReactiveCommand.CreateFromObservable(() => Router.NavigateAndReset.Execute(new HomeViewModel(appSettings, this)));
+        GoToMolCalculator = ReactiveCommand.CreateFromObservable(()=> Router.Navigate.Execute(new MolCalculatorViewModel(appSettings, this)));
         GoToConfigurationCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new ConfigurationViewModel(appSettings, this)));
     }
 
@@ -88,4 +92,6 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     }
 
     private void OnCloseApplication() => Close?.Invoke();
+    protected override MainWindowLanguage? GetCurrentWindowLanguage(Language? currentLanguage) => currentLanguage?.MainWindow;
+    protected override MainWindowResources? GetCurrentWindowResources(Resources? currentResources) => currentResources?.MainWindow;
 }

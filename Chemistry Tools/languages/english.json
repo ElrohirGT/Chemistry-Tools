@@ -19,5 +19,15 @@
 		"NextVersionPrefix": "New: ",
 		"DownloadButtonText": "Download",
 		"OmitButtonText": "Omit"
+	},
+	"MainWindow": {
+		"HomeButton": "Home",
+		"ConfigurationButton": "Configuration",
+		"MolCalculatorButton": "g/mol Calculator"
+	},
+	"MolCalculatorWindow": {
+		"Title": "g/mol Calculator",
+		"TextBoxWatermark": "Example: H2O",
+		"MainActionButton": "Calculate"
 	}
 }

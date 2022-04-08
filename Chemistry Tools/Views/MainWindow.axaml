@@ -12,16 +12,41 @@
         Title="Chemistry Tools"
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent">
+  <Window.Styles>
+    <Style Selector="Button.navButton">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderThickness" Value="0 0 2 0"/>
+      <Setter Property="CornerRadius" Value="0 0 0 0"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+    <Style Selector="StackPanel.navButtonContent">
+      <Setter Property="Spacing" Value="5"/>
+    </Style>
+  </Window.Styles>
 
   <Panel Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}" Opacity="0.7">
     <DockPanel x:DataType="vm:MainWindowViewModel">
       <ctrls:ApplicationHeader DockPanel.Dock="Top"/>
-      <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-        <ui:Button Command="{Binding GoHome}">
-          <ui:ImageIcon Width="50" Height="50" Source="{Binding UserSettings.CurrentTheme.Resources.MainWindow.HomeIcon.Image}"/>
-        </ui:Button>
-        <Button Command="{Binding GoToConfigurationCommand}">
-          <ui:ImageIcon Width="50" Height="50" Source="{Binding UserSettings.CurrentTheme.Resources.MainWindow.SettingsIcon.Image}"/>
+      <StackPanel Orientation="Vertical" DockPanel.Dock="Left" VerticalAlignment="Stretch">
+        <Button Command="{Binding GoHome}" Classes="navButton">
+          <StackPanel Orientation="Horizontal" Classes="navButtonContent">
+            <ui:ImageIcon Width="35" Height="35" Source="{Binding CurrentWindowResources.HomeIcon.Image}"/>
+            <TextBlock Text="{Binding CurrentWindowLanguage.HomeButton}" VerticalAlignment="Center" FontWeight="Medium"/>
+          </StackPanel>
+        </Button>
+        
+        <Rectangle Fill="Gray" Height="1" Margin="0 5 0 5"/>
+        <Button Command="{Binding GoToMolCalculator}" Classes="navButton">
+          <TextBlock Text="{Binding CurrentWindowLanguage.MolCalculatorButton}" FontWeight="Medium"/>
+        </Button>
+        
+        <Rectangle Fill="Gray" Height="1" Margin="0 5 0 5"/>
+        <Button Command="{Binding GoToConfigurationCommand}" VerticalAlignment="Bottom" Classes="navButton">
+          <StackPanel Orientation="Horizontal" Classes="navButtonContent">
+            <ui:ImageIcon Width="35" Height="35" Source="{Binding CurrentWindowResources.SettingsIcon.Image}"/>
+            <TextBlock Text="{Binding CurrentWindowLanguage.ConfigurationButton}" VerticalAlignment="Center" FontWeight="Medium"/>
+          </StackPanel>
         </Button>
       </StackPanel>
       <rxui:RoutedViewHost Router="{Binding Router}" />

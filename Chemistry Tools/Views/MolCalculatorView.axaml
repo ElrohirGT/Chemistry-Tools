@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:vm="using:Chemistry_Tools.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chemistry_Tools.Views.MolCalculatorView">
+  <StackPanel x:DataType="vm:MolCalculatorViewModel">
+    <TextBlock Text="{Binding CurrentWindowLanguage.Title}" Classes="TitleTextBlockStyle" HorizontalAlignment="Center"/>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+      <TextBox Watermark="{Binding CurrentWindowLanguage.TextBoxWatermark}" Width="150" HorizontalContentAlignment="Center" Text="{Binding TextBoxText}"/>
+      <Button HorizontalAlignment="Center" Classes="accent" Command="{Binding Calculate}" CommandParameter="{Binding TextBoxTex}">
+        <TextBlock Text="{Binding CurrentWindowLanguage.MainActionButton}" FontWeight="Bold"/>
+      </Button>
+    </StackPanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Background="Gray">
+    </StackPanel>
+  </StackPanel>
+</UserControl>

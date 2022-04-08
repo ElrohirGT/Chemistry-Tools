@@ -30,11 +30,13 @@ public abstract class SettingsBase<T> : ISettings<T>, INotifyPropertyChanged
 
     protected abstract Task _Save(FileStream fileStream);
 
-    protected void RaiseIfPropertyChanged<P>(ref P? backingField, P? newValue, [CallerMemberName] string? name = null) where P : IEquatable<P>
+    protected void RaiseIfPropertyChanged<P>(ref P? backingField, P? newValue, [CallerMemberName] string? name = null, Action<P?>? doIfChanged = null)
+        where P : IEquatable<P>
     {
         if (Equals(backingField, newValue))
             return;
         backingField = newValue;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        doIfChanged?.Invoke(newValue);
     }
 }

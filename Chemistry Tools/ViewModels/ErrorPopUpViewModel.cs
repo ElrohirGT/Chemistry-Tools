@@ -6,7 +6,7 @@ using Chemistry_Tools.UserSettings;
 using ReactiveUI;
 
 namespace Chemistry_Tools.ViewModels;
-public class ErrorPopUpViewModel : ViewModelBase
+public class ErrorPopUpViewModel : BaseViewModelWithResources<object, object>
 {
     public event Action<Unit>? Close;
 
@@ -40,6 +40,8 @@ public class ErrorPopUpViewModel : ViewModelBase
     }
 
     private void OnWindowClosing() => Close?.Invoke(Unit.Default);
+    protected override object? GetCurrentWindowLanguage(Language? currentLanguage) => null;
+    protected override object? GetCurrentWindowResources(Resources? currentResources) => null;
 
     public ReactiveCommand<Unit, Unit> CloseDialogCommand { get; }
     public ReactiveCommand<string, Unit> CopyErrorCommand { get; set; }
