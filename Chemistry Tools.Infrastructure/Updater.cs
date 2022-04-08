@@ -80,5 +80,9 @@ public class Updater : IUpdater
     private static UpdateStatus ConvertStatus(NetSparkleUpdater.Enums.UpdateStatus status) => (UpdateStatus)status;
     public Task InitAndBeginDownload() => _updater.InitAndBeginDownload(_mostRecentUpdate);
 
-    public void InstallUpdate(string path) => _installer.Install(path);
+    public void InstallUpdate(string path)
+    {
+        CloseApplication?.Invoke();
+        _installer.Install(path);
+    }
 }
