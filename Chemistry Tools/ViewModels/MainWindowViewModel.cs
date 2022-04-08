@@ -89,7 +89,6 @@ public class MainWindowViewModel : BaseViewModelWithResources<MainWindowLanguage
     public override async Task OnClosed(EventArgs e)
     {
         await base.OnClosed(e);
-        await UserSettings.Save();
         UserSettings.Dispose();
     }
 

@@ -24,6 +24,7 @@ public abstract class SettingsBase<T> : ISettings<T>, INotifyPropertyChanged
     /// <inheritdoc/>
     public Task Save()
     {
+        File.Delete(_filePath);
         using var fileStream = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.Write);
         return _Save(fileStream);
     }
