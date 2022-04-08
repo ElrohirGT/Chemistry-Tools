@@ -28,7 +28,6 @@ public partial class MainWindow : CoreWindow
         _viewModel.Close += Close;
         if (TitleBar is not null)
             TitleBar.ExtendViewIntoTitleBar = true;
-        //SetTitleBar(TitleBar);
     }
 
     private async Task ShowErrorDialogAsync(InteractionContext<Exception, Unit> interaction)

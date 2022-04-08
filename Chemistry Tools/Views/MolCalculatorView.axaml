@@ -6,7 +6,7 @@
              xmlns:vm="using:Chemistry_Tools.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Chemistry_Tools.Views.MolCalculatorView">
-  <StackPanel x:DataType="vm:MolCalculatorViewModel" HorizontalAlignment="Center" VerticalAlignment="Center">
+  <StackPanel x:DataType="vm:MolCalculatorViewModel" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
     <TextBlock Text="{Binding CurrentWindowLanguage.Title}" Classes="TitleTextBlockStyle" HorizontalAlignment="Center"/>
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
       <TextBox Watermark="{Binding CurrentWindowLanguage.TextBoxWatermark}" Width="150" HorizontalContentAlignment="Center" Text="{Binding TextBoxText}"/>
@@ -14,7 +14,9 @@
         <TextBlock Text="{Binding CurrentWindowLanguage.MainActionButton}" FontWeight="Bold"/>
       </Button>
     </StackPanel>
-    <TextBlock Text="{Binding ErrorMessage}" Classes="BodyStrongTextBlockStyle" Foreground="Red" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-    <TextBlock Text="{Binding SuccessMessage}" Classes="BodyStrongTextBlockStyle" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+    <TextBlock Text="{Binding ErrorMessage}" Classes="BodyStrongTextBlockStyle" Foreground="Red" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
+    <TextBlock Text="{Binding SuccessMessage}" Classes="BodyStrongTextBlockStyle" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
+    <TextBlock Text="{Binding CurrentWindowLanguage.InstructionsTitle}" Classes="SubtitleTextBlockStyle"/>
+    <TextBlock Text="{Binding CurrentWindowLanguage.Examples}"/>
   </StackPanel>
 </UserControl>
