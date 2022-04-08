@@ -23,10 +23,10 @@
 	"MainWindow": {
 		"HomeButton": "Inicio",
 		"ConfigurationButton": "Configuración",
-		"MolCalculatorButton": "Calculadora de g/mol"
+		"MolCalculatorButton": "Calculadora de Masa Molar"
 	},
 	"MolCalculatorWindow": {
-		"Title": "Calculadora de g/mol",
+		"Title": "Calculadora de Masa Molar",
 		"TextBoxWatermark": "Ejemplo: H2O",
 		"MainActionButton": "Calcular",
 		"ParseMoleculeErrorMessage": "Por favor ingrese una molécula válida!",
