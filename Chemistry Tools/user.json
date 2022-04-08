@@ -35,14 +35,16 @@
     "MainWindow": {
       "HomeButton": "Inicio",
       "ConfigurationButton": "Configuración",
-      "MolCalculatorButton": "Calculadora de g/mol"
+      "MolCalculatorButton": "Calculadora de Masa Molar"
     },
     "MolCalculatorWindow": {
-      "Title": "Calculadora de g/mol",
+      "Title": "Calculadora de Masa Molar",
       "TextBoxWatermark": "Ejemplo: H2O",
       "MainActionButton": "Calcular",
       "ParseMoleculeErrorMessage": "Por favor ingrese una molécula válida!",
-      "SuccessMessageFormat": "La molécula tiene un peso de {0} g/mol."
+      "SuccessMessageFormat": "La molécula tiene un peso de {0} g/mol.",
+      "InstructionsTitle": "¿Cómo Usar?",
+      "Examples": "Ejemplos válidos: NaHCO3, CH3COONH4, Ca3(PO4)2.\nPor favor cuidar las mayúsculas y minúsculas.\nPor el momento compuestos como: Fe4[Fe(CN)6]3 o CaSO4*0.5H2O dan resultados incorrectos.\nSi se quieren utilizar decimales se debe de usar la versión decimal: 1/2=0.5."
     }
   }
 }

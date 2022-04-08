@@ -42,7 +42,7 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
 
     private void CalculateMolOf(string textMolecule)
     {
-        if (!_periodicTable.TryParseMolecule(textMolecule, out ChemistryElement[] elements))
+        if (!_periodicTable.TryGetElementsOfMolecule(textMolecule, out ChemistryElement[] elements))
         {
             SuccessMessage = null;
             ErrorMessage = CurrentWindowLanguage?.ParseMoleculeErrorMessage;

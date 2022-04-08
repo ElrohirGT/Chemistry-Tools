@@ -8,8 +8,10 @@ using Chemistry_Tools.Core.Services.PeriodicTableService;
 namespace Chemistry_Tools.Infrastructure.Services;
 public class PeriodicTableService : IPeriodicTableService
 {
-    private readonly Regex MOLECULE_SPLIT_PATTERN = new(@"[A-Z][a-z]*\d*", RegexOptions.Compiled);
-    private readonly Regex ELEMENT_SPLIT_PATTERN = new(@"\d+", RegexOptions.Compiled);
+    private readonly Regex ELEMENT_SPLITTER = new(@"[A-Z][a-z]*\d*", RegexOptions.Compiled);
+    private readonly Regex ELEMENT_COMPONENTS = new(@"\d+", RegexOptions.Compiled);
+    private readonly Regex MOLECULE_SPLITTER = new(@"([A-Z][a-z]*)|\d*|\(|\)", RegexOptions.Compiled|RegexOptions.ExplicitCapture);
+
     private JsonSerializerOptions _options = new()
     {
         WriteIndented = true,
@@ -25,10 +27,11 @@ public class PeriodicTableService : IPeriodicTableService
         return JsonSerializer.Deserialize<Dictionary<string, ChemistryElement>>(fileStream, _options);
     }
 
-    public bool TryParseMolecule(string textMolecule, out ChemistryElement[] elements)
+    public bool TryGetElementsOfMolecule(string textMolecule, out ChemistryElement[] elements)
     {
-        Dictionary<string, decimal> elementsInText = GetElementsAndQuantities(textMolecule);
         elements = Array.Empty<ChemistryElement>();
+        if (!TryGetElementsAndQuantitites(textMolecule, out Dictionary<string, decimal> elementsInText))
+            return false;
         if (elementsInText.Count == 0)
             return false;
 
@@ -45,24 +48,64 @@ public class PeriodicTableService : IPeriodicTableService
         return true;
     }
 
-    private Dictionary<string, decimal> GetElementsAndQuantities(string textMolecule)
+    private bool TryGetElementsAndQuantitites(string textMolecule, out Dictionary<string, decimal> elementsInText)
     {
-        var quantityByElement = new Dictionary<string, decimal>();
-        string[] elements = MOLECULE_SPLIT_PATTERN.Matches(textMolecule).Select(m=>m.Value).ToArray();
+        elementsInText = new Dictionary<string, decimal>();
 
-        foreach(var element in elements)
+        if (!TryGetExpandedTextMolecule(textMolecule, out string expandedTextMolecule))
+            return false;
+
+        string[] elements = ELEMENT_SPLITTER.Matches(expandedTextMolecule).Select(m => m.Value).ToArray();
+
+        foreach (var element in elements)
         {
-            string capturedQuantity = ELEMENT_SPLIT_PATTERN.Match(element).Value;
+            string capturedQuantity = ELEMENT_COMPONENTS.Match(element).Value;
             decimal quantity = string.IsNullOrEmpty(capturedQuantity) ? 1 : decimal.Parse(capturedQuantity);
             string elementName = element;
             if (!string.IsNullOrEmpty(capturedQuantity))
                 elementName = element[..element.IndexOf(capturedQuantity)];
 
-            if (!quantityByElement.ContainsKey(element))
-                quantityByElement.Add(elementName, 0);
-            quantityByElement[elementName] += quantity;
+            elementsInText.TryAdd(elementName, 0);
+            elementsInText[elementName] += quantity;
         }
 
-        return quantityByElement;
+        return true;
+    }
+
+    private bool TryGetExpandedTextMolecule(string textMolecule, out string expandedTextMolecule)
+    {
+        expandedTextMolecule = string.Empty;
+        string[] moleculeParts = MOLECULE_SPLITTER.Matches(textMolecule).Select(m => m.Value).ToArray()[..^1];
+
+        var parenthesisScale = 1M;
+        var moleculeNumber = 1M;
+        var previousNumber = 1M;
+        var parenthesisInBalance = true;
+
+        for (int i = moleculeParts.Length-1; i > -1; i--)
+        {
+            var part = moleculeParts[i];
+            if (decimal.TryParse(part, out decimal currentNumber))
+                previousNumber *= currentNumber;
+            else if (string.IsNullOrEmpty(part))
+            {
+                parenthesisInBalance = !parenthesisInBalance;
+                if (!parenthesisInBalance)
+                    parenthesisScale = previousNumber;
+                else
+                    parenthesisScale = 1M;
+                previousNumber = 1M;
+            }
+            else
+            {
+                moleculeNumber = previousNumber;
+                moleculeParts[i] = $"{part}{parenthesisScale * moleculeNumber}";
+                previousNumber = 1M;
+            }
+        }
+
+        IEnumerable<string> values = moleculeParts.Where(s => !decimal.TryParse(s, out _)).Where((s)=>!string.IsNullOrEmpty(s));
+        expandedTextMolecule = string.Join(string.Empty, values);
+        return true;
     }
 }

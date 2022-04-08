@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Chemistry_Tools.Core.Services.PeriodicTableService;
 public interface IPeriodicTableService
 {
-    bool TryParseMolecule(string textMolecule, out ChemistryElement[] elements);
+    bool TryGetElementsOfMolecule(string textMolecule, out ChemistryElement[] elements);
 }

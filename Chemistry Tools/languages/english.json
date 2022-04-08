@@ -30,6 +30,8 @@
 		"TextBoxWatermark": "Example: H2O",
 		"MainActionButton": "Calculate",
 		"ParseMoleculeErrorMessage": "Please write a valid molecule!",
-		"SuccessMessageFormat": "The molecule has a weight of {0} g/mol."
+		"SuccessMessageFormat": "The molecule has a weight of {0} g/mol.",
+		"InstructionsTitle": "How to use?",
+		"Examples": "Valid input: NaHCO3, CH3COONH4, Ca3(PO4)2.\nPlease mind uppercase and lowercase letters.\nCompounds such as: Fe4[Fe(CN)6]3 o CaSO4*0.5H2O give incorrect results for the moment.\nIf you need to use decimals, use the decimal version: 1/2=0.5."
 	}
 }
