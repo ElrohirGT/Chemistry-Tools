@@ -15,4 +15,10 @@
     <ProjectReference Include="..\Chemistry Tools.Core\Chemistry Tools.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="periodicTable.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

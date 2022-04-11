@@ -1,6 +1,4 @@
-﻿
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.RegularExpressions;
 
 using Chemistry_Tools.Core.Services.PeriodicTableService;
@@ -8,9 +6,7 @@ using Chemistry_Tools.Core.Services.PeriodicTableService;
 namespace Chemistry_Tools.Infrastructure.Services;
 public class PeriodicTableService : IPeriodicTableService
 {
-    private readonly Regex ELEMENT_SPLITTER = new(@"[A-Z][a-z]*\d*", RegexOptions.Compiled);
-    private readonly Regex ELEMENT_COMPONENTS = new(@"\d+", RegexOptions.Compiled);
-    private readonly Regex MOLECULE_SPLITTER = new(@"([A-Z][a-z]*)|\d*|\(|\)", RegexOptions.Compiled|RegexOptions.ExplicitCapture);
+    private readonly Regex MOLECULE_SPLITTER = new(@"\(|\)|([A-Z][a-z]*)|(\d+/\d+)|\d*", RegexOptions.Compiled|RegexOptions.ExplicitCapture);
 
     private JsonSerializerOptions _options = new()
     {
@@ -19,7 +15,7 @@ public class PeriodicTableService : IPeriodicTableService
 
     public Dictionary<string, ChemistryElement> PeriodicTable { get; set; }
 
-    public PeriodicTableService() => PeriodicTable = ParseJson("periodicTable.json");
+    public PeriodicTableService(string fileName = "periodicTable.json") => PeriodicTable = ParseJson(fileName);
 
     private Dictionary<string, ChemistryElement> ParseJson(string fileName)
     {
@@ -51,33 +47,9 @@ public class PeriodicTableService : IPeriodicTableService
     private bool TryGetElementsAndQuantitites(string textMolecule, out Dictionary<string, decimal> elementsInText)
     {
         elementsInText = new Dictionary<string, decimal>();
-
-        if (!TryGetExpandedTextMolecule(textMolecule, out string expandedTextMolecule))
-            return false;
-
-        string[] elements = ELEMENT_SPLITTER.Matches(expandedTextMolecule).Select(m => m.Value).ToArray();
-
-        foreach (var element in elements)
-        {
-            string capturedQuantity = ELEMENT_COMPONENTS.Match(element).Value;
-            decimal quantity = string.IsNullOrEmpty(capturedQuantity) ? 1 : decimal.Parse(capturedQuantity);
-            string elementName = element;
-            if (!string.IsNullOrEmpty(capturedQuantity))
-                elementName = element[..element.IndexOf(capturedQuantity)];
-
-            elementsInText.TryAdd(elementName, 0);
-            elementsInText[elementName] += quantity;
-        }
-
-        return true;
-    }
-
-    private bool TryGetExpandedTextMolecule(string textMolecule, out string expandedTextMolecule)
-    {
-        expandedTextMolecule = string.Empty;
         string[] moleculeParts = MOLECULE_SPLITTER.Matches(textMolecule).Select(m => m.Value).ToArray()[..^1];
 
-        var parenthesisScale = 1M;
+        var parenthesisScale = new Stack<decimal>(new decimal[] { 1M });
         var moleculeNumber = 1M;
         var previousNumber = 1M;
         var parenthesisInBalance = true;
@@ -85,27 +57,44 @@ public class PeriodicTableService : IPeriodicTableService
         for (int i = moleculeParts.Length-1; i > -1; i--)
         {
             var part = moleculeParts[i];
-            if (decimal.TryParse(part, out decimal currentNumber))
-                previousNumber *= currentNumber;
-            else if (string.IsNullOrEmpty(part))
+            decimal currentNumber;
+            if (TryParseNumberPart(part, out currentNumber))
+                previousNumber *= currentNumber * parenthesisScale.Peek();
+            else if (part == ")")
             {
                 parenthesisInBalance = !parenthesisInBalance;
-                if (!parenthesisInBalance)
-                    parenthesisScale = previousNumber;
-                else
-                    parenthesisScale = 1M;
+                parenthesisScale.Push(previousNumber == 1 ? parenthesisScale.Peek() : previousNumber);
+                previousNumber = 1M;
+            }
+            else if (part == "(")
+            {
+                parenthesisInBalance = !parenthesisInBalance;
+                parenthesisScale.Pop();
                 previousNumber = 1M;
             }
             else
             {
-                moleculeNumber = previousNumber;
-                moleculeParts[i] = $"{part}{parenthesisScale * moleculeNumber}";
+                moleculeNumber = previousNumber == 1 ? parenthesisScale.Peek() : previousNumber;
+                elementsInText.TryAdd(part, 0);
+                elementsInText[part] += moleculeNumber;
+
+                moleculeNumber = 1M;
                 previousNumber = 1M;
             }
         }
+        return parenthesisInBalance;
+    }
 
-        IEnumerable<string> values = moleculeParts.Where(s => !decimal.TryParse(s, out _)).Where((s)=>!string.IsNullOrEmpty(s));
-        expandedTextMolecule = string.Join(string.Empty, values);
+    private static bool TryParseNumberPart(string part, out decimal currentNumber)
+    {
+        if (decimal.TryParse(part, out currentNumber))
+            return true;
+
+        string[] fractionParts = part.Split('/');
+        if (!fractionParts.All((s) => decimal.TryParse(s, out _)))
+            return false;
+
+        currentNumber = decimal.Parse(fractionParts[0]) / decimal.Parse(fractionParts[1]);
         return true;
     }
 }

@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chemistry Tools", "Chemistry Tools\Chemistry Tools.csproj", "{D1377ABD-E8C0-4E30-B1CE-C58FFE9E4EE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chemistry Tools.Core", "Chemistry Tools.Core\Chemistry Tools.Core.csproj", "{E059B800-8574-4DC4-B18F-3A40AE052971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chemistry Tools.Core", "Chemistry Tools.Core\Chemistry Tools.Core.csproj", "{E059B800-8574-4DC4-B18F-3A40AE052971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chemistry Tools.Infrastructure", "Chemistry Tools.Infrastructure\Chemistry Tools.Infrastructure.csproj", "{B39CE22E-926A-48AD-A042-209AED25DA46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chemistry Tools.Infrastructure", "Chemistry Tools.Infrastructure\Chemistry Tools.Infrastructure.csproj", "{B39CE22E-926A-48AD-A042-209AED25DA46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chemistry Tools.Infrastructure.Tests", "Chemistry Tools.Infrastructure.Tests\Chemistry Tools.Infrastructure.Tests.csproj", "{6D50CD4B-932E-446B-8324-B41AB155E70B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B39CE22E-926A-48AD-A042-209AED25DA46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39CE22E-926A-48AD-A042-209AED25DA46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39CE22E-926A-48AD-A042-209AED25DA46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D50CD4B-932E-446B-8324-B41AB155E70B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D50CD4B-932E-446B-8324-B41AB155E70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D50CD4B-932E-446B-8324-B41AB155E70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D50CD4B-932E-446B-8324-B41AB155E70B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
