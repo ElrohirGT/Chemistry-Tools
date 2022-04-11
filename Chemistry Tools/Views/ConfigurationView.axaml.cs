@@ -1,7 +1,5 @@
 using System.Reactive.Disposables;
 
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 
@@ -15,15 +13,15 @@ public partial class ConfigurationView : ReactiveUserControl<ConfigurationViewMo
     public ConfigurationView()
     {
         InitializeComponent();
-    }
-
-    private void InitializeComponent()
-    {
         this.WhenActivated(disposables =>
         {
             ViewModel?.ReloadData();
             Disposable.Create(() => ViewModel?.SaveData()).DisposeWith(disposables);
         });
+    }
+
+    private void InitializeComponent()
+    {
         AvaloniaXamlLoader.Load(this);
     }
 }
