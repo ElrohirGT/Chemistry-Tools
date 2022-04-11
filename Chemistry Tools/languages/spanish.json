@@ -23,7 +23,8 @@
 	"MainWindow": {
 		"HomeButton": "Inicio",
 		"ConfigurationButton": "Configuración",
-		"MolCalculatorButton": "Calculadora de Masa Molar"
+		"MolCalculatorButton": "Calculadora de Masa Molar",
+		"ReactionStoichiometryButton": "Estequiometría de una Reacción"
 	},
 	"MolCalculatorWindow": {
 		"Title": "Calculadora de Masa Molar",

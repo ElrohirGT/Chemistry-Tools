@@ -10,4 +10,5 @@ public class MainWindowLanguage
     public string HomeButton { get; set; }
     public string ConfigurationButton { get; set; }
     public string MolCalculatorButton { get; set; }
+    public string ReactionStoichiometryButton { get; set; }
 }

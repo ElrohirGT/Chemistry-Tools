@@ -22,6 +22,7 @@ public class MainWindowViewModel : BaseViewModelWithResources<MainWindowLanguage
     public Interaction<Exception, Unit> ShowError { get; } = new Interaction<Exception, Unit>();
     public ReactiveCommand<Unit, IRoutableViewModel> GoToConfigurationCommand { get; }
     public ReactiveCommand<Unit, IRoutableViewModel> GoToMolCalculator { get; set; }
+    public ReactiveCommand<Unit, IRoutableViewModel> GoToReactionStoichiometry { get; set; }
     public ReactiveCommand<Unit, IRoutableViewModel> GoHome { get; }
 
     public RoutingState Router { get; } = new RoutingState();
@@ -33,6 +34,7 @@ public class MainWindowViewModel : BaseViewModelWithResources<MainWindowLanguage
         _updater = updater;
         GoHome = ReactiveCommand.CreateFromObservable(() => Router.NavigateAndReset.Execute(new HomeViewModel(appSettings, this)));
         GoToMolCalculator = ReactiveCommand.CreateFromObservable(()=> Router.Navigate.Execute(new MolCalculatorViewModel(appSettings, this, Locator.Current.GetService<IPeriodicTableService>())));
+        GoToReactionStoichiometry = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new ReactionStoichiometryViewModel(appSettings, this)));
         GoToConfigurationCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new ConfigurationViewModel(appSettings, this)));
     }
 

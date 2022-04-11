@@ -12,6 +12,7 @@ public sealed class Language : IEquatable<Language>
     public string Name { get; set; }
     public MainWindowLanguage MainWindow { get; set; }
     public MolCalculatorWindowLanguage MolCalculatorWindow { get; set; }
+    public ReactionStoichiometryWindowLanguage ReactionStoichiometryWindow { get; set; }
     public ConfigurationWindowLanguage ConfigurationWindow { get; set; }
     public UpdatePopUpWindowLanguage UpdatePopUpWindow { get; set; }
     public UpdateDownloadingWindowLanguage UpdateDownloadingWindow { get; set; }

@@ -23,7 +23,8 @@
 	"MainWindow": {
 		"HomeButton": "Home",
 		"ConfigurationButton": "Configuration",
-		"MolCalculatorButton": "Molar Mass Calculator"
+		"MolCalculatorButton": "Molar Mass Calculator",
+		"ReactionStoichiometryButton": "Reaction Stoichiometry"
 	},
 	"MolCalculatorWindow": {
 		"Title": "Molar Mass Calculator",

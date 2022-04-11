@@ -40,6 +40,9 @@
         <Button Command="{Binding GoToMolCalculator}" Classes="navButton">
           <TextBlock Text="{Binding CurrentWindowLanguage.MolCalculatorButton}" FontWeight="Medium"/>
         </Button>
+        <Button Command="{Binding GoToReactionStoichiometry}" Classes="navButton">
+          <TextBlock Text="{Binding CurrentWindowLanguage.ReactionStoichiometryButton}" FontWeight="Medium"/>
+        </Button>
         
         <Rectangle Fill="Gray" Height="1" Margin="0 5 0 5"/>
         <Button Command="{Binding GoToConfigurationCommand}" VerticalAlignment="Bottom" Classes="navButton">
