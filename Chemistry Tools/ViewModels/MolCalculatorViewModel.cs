@@ -40,7 +40,7 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
         _periodicTable = periodicTable;
     }
 
-    private void CalculateMolOf(string textMolecule)
+    public void CalculateMolOf(string textMolecule)
     {
         if (!_periodicTable.TryGetElementsOfMolecule(textMolecule, out ChemistryElement[] elements))
         {
