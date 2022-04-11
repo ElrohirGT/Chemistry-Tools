@@ -45,7 +45,7 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
         if (!_periodicTable.TryGetElementsOfMolecule(textMolecule, out ChemistryElement[] elements))
         {
             SuccessMessage = null;
-            ErrorMessage = CurrentWindowLanguage?.ParseMoleculeErrorMessage;
+            ErrorMessage = CurrentWindowLanguage?.ErrorMessageFormat;
         }
         else
         {
