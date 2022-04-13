@@ -8,4 +8,5 @@ namespace Chemistry_Tools.Core.Services.PeriodicTableService;
 public interface IPeriodicTableService
 {
     bool TryGetElementsOfMolecule(string textMolecule, out ChemistryElement[] elements);
+    bool TryGetChemistryEquation(string reactionInText, out ChemistryEquation reaction);
 }

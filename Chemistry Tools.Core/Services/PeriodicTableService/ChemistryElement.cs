@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Chemistry_Tools.Core.Services.PeriodicTableService;
 
-namespace Chemistry_Tools.Core.Services.PeriodicTableService;
-public class ChemistryElement
+public struct ChemistryElement : IChemistryElement
 {
+    public string ElementName { get; set; }
     public decimal MolarMass { get; set; }
     public decimal Quantity { get; set; }
+
 }

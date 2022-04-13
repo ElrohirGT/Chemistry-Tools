@@ -29,10 +29,22 @@
 	"MolCalculatorWindow": {
 		"Title": "Calculadora de Masa Molar",
 		"TextBoxWatermark": "Ejemplo: H2O",
-		"MainActionButton": "Calcular",
-		"ParseMoleculeErrorMessage": "Por favor ingrese una molécula válida!",
+		"ErrorMessageFormat": "¡Por favor ingrese una molécula válida!",
 		"SuccessMessageFormat": "La molécula tiene un peso de {0} g/mol.",
 		"InstructionsTitle": "¿Cómo Usar?",
 		"Examples": "Ejemplos válidos: NaHCO3, CH3COONH4, Ca3(PO4)2, Fe4(Fe(CN)6)3.\nPor favor cuidar las mayúsculas y minúsculas.\nUtilice solamente paréntesis para anidar compuestos.\nSi se quieren utilizar decimales, utilice la fracción: H1/2 es una entrada válida al contrario de H0.5."
+	},
+	"ReactionStoichiometryWindow": {
+		"Title": "Estequiometría de una Reacción",
+		"TextBoxWatermark": "Ejemplo: 5Ca+V2O5->5CaO+2V",
+		"ComboBoxWatermark": "Producto Objetivo",
+		"Examples": "//TODO",
+		"InstructionsTitle": "¿Cómo usar?",
+		"ErrorMessageFormat": "¡Por favor ingresa una ecuación válida!",
+		"SuccessMessageFormat": "El reactivo limitante es {0}, con una cantidad de {1} igual a: {2:N6} g.",
+		"SecondActionTitle": "% de Rendimiento",
+		"ExperimentalMassTextBlockText": "Masa experimental (g):",
+		"SecondarySuccessMessageFormat": "{0:P2} de {1}",
+		"CalculateButtonText": "Calcular"
 	}
 }

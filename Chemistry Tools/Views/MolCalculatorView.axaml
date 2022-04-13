@@ -9,8 +9,10 @@
   <StackPanel x:DataType="vm:MolCalculatorViewModel" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
     <TextBlock Text="{Binding CurrentWindowLanguage.Title}" Classes="TitleTextBlockStyle" HorizontalAlignment="Center"/>
     <TextBox Name="MoleculeTextBlock" Watermark="{Binding CurrentWindowLanguage.TextBoxWatermark}" Width="150" HorizontalContentAlignment="Center" Text="{Binding TextBoxText}"/>
-    <TextBlock Text="{Binding ErrorMessage}" Classes="BodyStrongTextBlockStyle" Foreground="Red" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
+    
+    <TextBlock Text="{Binding ErrorMessageFormat}" Classes="BodyStrongTextBlockStyle" Foreground="Red" IsVisible="{Binding ErrorMessageFormat, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
     <TextBlock Text="{Binding SuccessMessage}" Classes="BodyStrongTextBlockStyle" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
+    
     <TextBlock Text="{Binding CurrentWindowLanguage.InstructionsTitle}" Classes="SubtitleTextBlockStyle"/>
     <TextBlock Text="{Binding CurrentWindowLanguage.Examples}"/>
   </StackPanel>

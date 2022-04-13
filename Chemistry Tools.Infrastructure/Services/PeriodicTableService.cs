@@ -6,7 +6,9 @@ using Chemistry_Tools.Core.Services.PeriodicTableService;
 namespace Chemistry_Tools.Infrastructure.Services;
 public class PeriodicTableService : IPeriodicTableService
 {
-    private readonly Regex MOLECULE_SPLITTER = new(@"\(|\)|([A-Z][a-z]*)|(\d+/\d+)|\d*", RegexOptions.Compiled|RegexOptions.ExplicitCapture);
+    private const string EQUATION_SEPARATOR = "->";
+    private readonly Regex MOLECULE_SPLITTER = new(@"\(|\)|([A-Z][a-z]*)|(\d+\/\d+)|\d*", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+    private readonly Regex VALID_MOLECULE_CHECKER = new(@"(?<molQuantity>(\d+\/\d+)|\d*)(?<molecule>(\(*[A-Z][a-z]*((\d+\/\d+)|\d*)\)*((\d+\/\d+)|\d*))+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
     private JsonSerializerOptions _options = new()
     {
@@ -32,11 +34,12 @@ public class PeriodicTableService : IPeriodicTableService
             return false;
 
         List<ChemistryElement> chemistryElements = new();
-        foreach (var elementInText in elementsInText.Keys)
+        foreach (var elementName in elementsInText.Keys)
         {
-            if (!PeriodicTable.TryGetValue(elementInText, out ChemistryElement? chemistryElement))
+            if (!PeriodicTable.TryGetValue(elementName, out ChemistryElement chemistryElement))
                 return false;
-            chemistryElement.Quantity = elementsInText[elementInText];
+            chemistryElement.Quantity = elementsInText[elementName];
+            chemistryElement.ElementName = elementName;
             chemistryElements.Add(chemistryElement);
         }
 
@@ -94,7 +97,69 @@ public class PeriodicTableService : IPeriodicTableService
         if (!fractionParts.All((s) => decimal.TryParse(s, out _)))
             return false;
 
-        currentNumber = decimal.Parse(fractionParts[0]) / decimal.Parse(fractionParts[1]);
+        var numerator = decimal.Parse(fractionParts[0]);
+        var denominator = decimal.Parse(fractionParts[1]);
+        if (denominator == 0)
+            return false;
+
+        currentNumber =  numerator / denominator;
+        return true;
+    }
+
+    public bool TryGetChemistryEquation(string reactionInText, out ChemistryEquation reaction)
+    {
+        reaction = new ChemistryEquation();
+        if (!reactionInText.Contains(EQUATION_SEPARATOR))
+            return false;
+
+        var reactionParts = reactionInText.Split(EQUATION_SEPARATOR, StringSplitOptions.TrimEntries|StringSplitOptions.RemoveEmptyEntries);
+        if (reactionParts.Length != 2)
+            return false;
+
+        if (!TryGetMolecules(reactionParts[0], out IList<IChemistryMolecule> reactants))
+            return false;
+        reaction.Reactants = reactants;
+
+        if (!TryGetMolecules(reactionParts[1], out IList<IChemistryMolecule> products))
+            return false;
+        reaction.Products = products;
+
+        return true;
+    }
+
+    private bool TryGetMolecules(string equationSide, out IList<IChemistryMolecule> molecules)
+    {
+        molecules = new List<IChemistryMolecule>();
+        var moleculesInText = equationSide.Split('+');
+
+        foreach (var possibleMolecule in moleculesInText)
+        {
+            if (!VALID_MOLECULE_CHECKER.IsMatch(possibleMolecule))
+                return false;
+
+            var match = VALID_MOLECULE_CHECKER.Match(possibleMolecule);
+
+            string molQuantityInText = match.Groups["molQuantity"].Value;
+            molQuantityInText = string.IsNullOrEmpty(molQuantityInText) ? "1" : molQuantityInText;
+            if (!TryParseNumberPart(molQuantityInText, out decimal molQuantity))
+                return false;
+
+            string chemicalComposition = match.Groups["molecule"].Value;
+            if (!TryGetElementsOfMolecule(chemicalComposition, out ChemistryElement[] elements))
+                return false;
+
+            var molecule = new ChemistryMolecule
+            {
+                Elements = new Dictionary<string, IChemistryElement>(),
+                ChemicalComposition = chemicalComposition,
+                MolQuantity = molQuantity
+            };
+            foreach (var element in elements)
+                molecule.Elements.TryAdd(element.ElementName, element);
+
+            molecules.Add(molecule);
+        }
+
         return true;
     }
 }
