@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Chemistry Tools"
-#define MyAppVersion "0.0.2"
+#define MyAppVersion "0.0.3"
 #define MyAppPublisher "ElrohirGT"
 #define MyAppURL "https://github.com/ElrohirGT/Chemistry-Tools"
 #define MyAppExeName "Chemistry Tools.exe"
