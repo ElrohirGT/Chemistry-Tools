@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 using Chemistry_Tools.Core.Services.PeriodicTableService;
 using Chemistry_Tools.Infrastructure.Services;
 
@@ -20,11 +17,10 @@ public class PeriodicTableServiceTests
     [InlineData("Fe4(Fe(CN)6)3", 859.22)]
     public void CanCalculateMolarMassAccurately(string moleculeInText, decimal shouldBe)
     {
-        var couldParseIt = _table.TryGetElementsOfMolecule(moleculeInText, out ChemistryElement[] elements);
+        var couldParseIt = _table.TryGetMolecule(moleculeInText, out var molecule);
         Assert.True(couldParseIt);
 
-        decimal total = Math.Round(elements.Sum(el => el.MolarMass * el.Quantity), 2);
-        Assert.InRange(total, shouldBe-0.02M, shouldBe+0.02M);
+        Assert.InRange(molecule.GramsByMol, shouldBe-0.02M, shouldBe+0.02M);
     }
 
     [Theory]
@@ -32,12 +28,12 @@ public class PeriodicTableServiceTests
     [InlineData("H2O", 2)]
     [InlineData("W(H2O)2", 3)]
     [InlineData("Fe4(Fe(CN)6)3", 3)]
-    public void CanParseMoleculeElements(string moleculeInText, int elementCount)
+    public void CanParseMolecule(string moleculeInText, int elementCount)
     {
-        var couldParseIt = _table.TryGetElementsOfMolecule(moleculeInText, out var elements);
+        var couldParseIt = _table.TryGetMolecule(moleculeInText, out var molecule);
         Assert.True(couldParseIt);
 
-        Assert.Equal(elementCount, elements.Length);
+        Assert.Equal(elementCount, molecule.Elements.Count);
     }
 
     [Theory]

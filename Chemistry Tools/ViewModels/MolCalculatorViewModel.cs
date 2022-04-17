@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reactive;
 
 using Chemistry_Tools.Core.Services.PeriodicTableService;
@@ -42,7 +41,7 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
 
     public void CalculateMolOf(string textMolecule)
     {
-        if (!_periodicTable.TryGetElementsOfMolecule(textMolecule, out ChemistryElement[] elements))
+        if (!_periodicTable.TryGetMolecule(textMolecule, out ChemistryMolecule? molecule))
         {
             SuccessMessage = null;
             ErrorMessage = CurrentWindowLanguage?.ErrorMessageFormat;
@@ -50,8 +49,7 @@ public class MolCalculatorViewModel : BaseViewModelWithResources<MolCalculatorWi
         else
         {
             ErrorMessage = null;
-            decimal sum = elements.Sum((e) => e.MolarMass * e.Quantity);
-            SuccessMessage = string.Format(CurrentWindowLanguage?.SuccessMessageFormat ?? string.Empty, sum);
+            SuccessMessage = string.Format(CurrentWindowLanguage?.SuccessMessageFormat ?? string.Empty, molecule.GramsByMol);
         }
     }
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Chemistry_Tools.Core.Services.PeriodicTableService;
 public interface IPeriodicTableService
 {
-    bool TryGetElementsOfMolecule(string textMolecule, out ChemistryElement[] elements);
-    bool TryGetChemistryEquation(string reactionInText, out ChemistryEquation reaction);
+    bool TryGetChemistryEquation(string reactionInText, [NotNullWhen(true)] out ChemistryEquation? reaction);
+    bool TryGetMolecule(string textMolecule, [NotNullWhen(true)] out ChemistryMolecule? molecule);
 }

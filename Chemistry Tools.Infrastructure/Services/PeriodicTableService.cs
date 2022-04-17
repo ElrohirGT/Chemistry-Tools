@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 using Chemistry_Tools.Core.Services.PeriodicTableService;
@@ -10,7 +11,7 @@ public class PeriodicTableService : IPeriodicTableService
     private readonly Regex MOLECULE_SPLITTER = new(@"\(|\)|([A-Z][a-z]*)|(\d+\/\d+)|\d*", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
     private readonly Regex VALID_MOLECULE_CHECKER = new(@"(?<molQuantity>(\d+\/\d+)|\d*)(?<molecule>(\(*[A-Z][a-z]*((\d+\/\d+)|\d*)\)*((\d+\/\d+)|\d*))+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
-    private JsonSerializerOptions _options = new()
+    private readonly JsonSerializerOptions _options = new()
     {
         WriteIndented = true,
     };
@@ -25,7 +26,7 @@ public class PeriodicTableService : IPeriodicTableService
         return JsonSerializer.Deserialize<Dictionary<string, ChemistryElement>>(fileStream, _options);
     }
 
-    public bool TryGetElementsOfMolecule(string textMolecule, out ChemistryElement[] elements)
+    private bool TryGetElementsOfMolecule(string textMolecule, out ChemistryElement[] elements)
     {
         elements = Array.Empty<ChemistryElement>();
         if (!TryGetElementsAndQuantitites(textMolecule, out Dictionary<string, decimal> elementsInText))
@@ -106,9 +107,9 @@ public class PeriodicTableService : IPeriodicTableService
         return true;
     }
 
-    public bool TryGetChemistryEquation(string reactionInText, out ChemistryEquation reaction)
+    public bool TryGetChemistryEquation(string reactionInText, [NotNullWhen(true)] out ChemistryEquation? reaction)
     {
-        reaction = new ChemistryEquation();
+        reaction = null;
         if (!reactionInText.Contains(EQUATION_SEPARATOR))
             return false;
 
@@ -118,12 +119,15 @@ public class PeriodicTableService : IPeriodicTableService
 
         if (!TryGetMolecules(reactionParts[0], out IList<IChemistryMolecule> reactants))
             return false;
-        reaction.Reactants = reactants;
 
         if (!TryGetMolecules(reactionParts[1], out IList<IChemistryMolecule> products))
             return false;
-        reaction.Products = products;
 
+        reaction = new ChemistryEquation
+        {
+            Reactants = reactants,
+            Products = products
+        };
         return true;
     }
 
@@ -134,32 +138,40 @@ public class PeriodicTableService : IPeriodicTableService
 
         foreach (var possibleMolecule in moleculesInText)
         {
-            if (!VALID_MOLECULE_CHECKER.IsMatch(possibleMolecule))
+            if (!TryGetMolecule(possibleMolecule, out ChemistryMolecule? molecule))
                 return false;
-
-            var match = VALID_MOLECULE_CHECKER.Match(possibleMolecule);
-
-            string molQuantityInText = match.Groups["molQuantity"].Value;
-            molQuantityInText = string.IsNullOrEmpty(molQuantityInText) ? "1" : molQuantityInText;
-            if (!TryParseNumberPart(molQuantityInText, out decimal molQuantity))
-                return false;
-
-            string chemicalComposition = match.Groups["molecule"].Value;
-            if (!TryGetElementsOfMolecule(chemicalComposition, out ChemistryElement[] elements))
-                return false;
-
-            var molecule = new ChemistryMolecule
-            {
-                Elements = new Dictionary<string, IChemistryElement>(),
-                ChemicalComposition = chemicalComposition,
-                MolQuantity = molQuantity
-            };
-            foreach (var element in elements)
-                molecule.Elements.TryAdd(element.ElementName, element);
-
             molecules.Add(molecule);
         }
 
+        return true;
+    }
+
+    public bool TryGetMolecule(string textMolecule, [NotNullWhen(true)] out ChemistryMolecule? molecule)
+    {
+        molecule = null;
+
+        if (!VALID_MOLECULE_CHECKER.IsMatch(textMolecule))
+            return false;
+
+        var match = VALID_MOLECULE_CHECKER.Match(textMolecule);
+
+        string molQuantityInText = match.Groups["molQuantity"].Value;
+        molQuantityInText = string.IsNullOrEmpty(molQuantityInText) ? "1" : molQuantityInText;
+        if (!TryParseNumberPart(molQuantityInText, out decimal molQuantity))
+            return false;
+
+        string chemicalComposition = match.Groups["molecule"].Value;
+        if (!TryGetElementsOfMolecule(chemicalComposition, out ChemistryElement[] elements))
+            return false;
+
+        molecule = new ChemistryMolecule
+        {
+            Elements = new Dictionary<string, IChemistryElement>(),
+            ChemicalComposition = chemicalComposition,
+            MolQuantity = molQuantity
+        };
+        foreach (var element in elements)
+            molecule.Elements.TryAdd(element.ElementName, element);
         return true;
     }
 }
