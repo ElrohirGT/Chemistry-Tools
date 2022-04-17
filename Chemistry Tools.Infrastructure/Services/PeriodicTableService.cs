@@ -8,8 +8,8 @@ namespace Chemistry_Tools.Infrastructure.Services;
 public class PeriodicTableService : IPeriodicTableService
 {
     private const string EQUATION_SEPARATOR = "->";
-    private readonly Regex MOLECULE_SPLITTER = new(@"\(|\)|([A-Z][a-z]*)|(\d+\/\d+)|\d*", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
-    private readonly Regex VALID_MOLECULE_CHECKER = new(@"(?<molQuantity>(\d+\/\d+)|\d*)(?<molecule>(\(*[A-Z][a-z]*((\d+\/\d+)|\d*)\)*((\d+\/\d+)|\d*))+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+    private readonly Regex MOLECULE_SPLITTER = new(@"\(|\)|([A-Z][a-z]*)|(\d+\/\d+)|\d+", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+    private readonly Regex VALID_MOLECULE_CHECKER = new(@"(?<molQuantity>(\d+\/\d+)|\d*)(?<molecule>(\(*[A-Z][a-z]*((\d+\/\d+)|\d*)(\)*((\d+\/\d+)|\d*))*)+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
     private readonly JsonSerializerOptions _options = new()
     {
@@ -51,7 +51,7 @@ public class PeriodicTableService : IPeriodicTableService
     private bool TryGetElementsAndQuantitites(string textMolecule, out Dictionary<string, decimal> elementsInText)
     {
         elementsInText = new Dictionary<string, decimal>();
-        string[] moleculeParts = MOLECULE_SPLITTER.Matches(textMolecule).Select(m => m.Value).ToArray()[..^1];
+        string[] moleculeParts = MOLECULE_SPLITTER.Matches(textMolecule).Select(m => m.Value).ToArray();
 
         var parenthesisScale = new Stack<decimal>(new decimal[] { 1M });
         var moleculeNumber = 1M;
