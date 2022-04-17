@@ -38,13 +38,15 @@
 		"Title": "Reaction's' Stoichiometry",
 		"TextBoxWatermark": "Example: 5Ca+V2O5->5CaO+2V",
 		"ComboBoxWatermark": "Target Product",
-		"Examples": "//TODO",
-		"InstructionsTitle": "How to use?",
 		"ErrorMessageFormat": "Please write a valid equation!",
 		"SuccessMessageFormat": "The limiting reactant is {0}, with a quantity of {1} equal to: {2} g.",
-		"SecondActionTitle": "Performance %",
+		"SecondActionTitle": "Yield %",
 		"ExperimentalMassTextBlockText": "Experimental mass (g):",
 		"SecondarySuccessMessageFormat": "{0:P2} of {1}",
 		"CalculateButtonText": "Calculate"
+	},
+	"StoichiometryInfoWindow": {
+		"Title": "How to use?",
+		"Instructions": "1) Type the chemical reaction.\n2) Select the target product to calculate the limitant reactant.\n3) Write the amount of reactants in grams.\n4) Press the calculate button.\n\nTo calculate the yield % just type in the last textbox the mass of the experimental product."
 	}
 }

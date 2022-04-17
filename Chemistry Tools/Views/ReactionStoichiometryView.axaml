@@ -6,54 +6,59 @@
              xmlns:core="using:Chemistry_Tools.Core.Services.PeriodicTableService"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Chemistry_Tools.Views.ReactionStoichiometryView">
-  <StackPanel x:DataType="vm:ReactionStoichiometryViewModel" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
-    <TextBlock Text="{Binding CurrentWindowLanguage.Title}" HorizontalAlignment="Center" Classes="TitleTextBlockStyle"/>
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
-      <TextBox Name="InputTextBox" Watermark="{Binding CurrentWindowLanguage.TextBoxWatermark}" Width="350" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Text="{Binding TextBoxText}"/>
-      <ComboBox Items="{Binding ChemistryProducts}" PlaceholderText="{Binding CurrentWindowLanguage.ComboBoxWatermark}" SelectedItem="{Binding SelectedProduct}">
-        <ComboBox.ItemTemplate>
-          <DataTemplate x:DataType="core:ChemistryMolecule">
-            <TextBlock Text="{Binding ChemicalComposition}"/>
-          </DataTemplate>
-        </ComboBox.ItemTemplate>
-      </ComboBox>
-    </StackPanel>
-    <ItemsRepeater Items="{Binding ChemistryReactants}" HorizontalAlignment="Center">
-      <ItemsRepeater.Layout>
-        <UniformGridLayout Orientation="Vertical" MinColumnSpacing="3" MinRowSpacing="5" ItemsJustification="Center"/>
-      </ItemsRepeater.Layout>
-      <ItemsRepeater.ItemTemplate>
-        <DataTemplate x:DataType="core:ChemistryMolecule">
-          <StackPanel Orientation="Horizontal" Spacing="5">
-            <TextBlock Text="{Binding ChemicalComposition}" HorizontalAlignment="Right" VerticalAlignment="Center" Classes="BodyStrongTextBlockStyle"/>
-            <NumericUpDown AllowSpin="False" ShowButtonSpinner="False" ClipValueToMinMax="True" Minimum="0" Value="{Binding Grams}" />
-          </StackPanel>
-        </DataTemplate>
-      </ItemsRepeater.ItemTemplate>
-    </ItemsRepeater>
-    
-    <TextBlock 
-      Text="{Binding SuccessMessage}"
-      HorizontalAlignment="Center"
-      IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-      Classes="BodyStrongTextBlockStyle"
-      TextWrapping="Wrap"
-      />
-    <TextBlock
-      Text="{Binding ErrorMessage}"
-      HorizontalAlignment="Center"
-      IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-      Foreground="Red"
-      Classes="BodyStrongTextBlockStyle"
-      />
-    <Button Command="{Binding Calculate}" CommandParameter="{Binding SelectedProduct}" HorizontalAlignment="Center" Classes="accent">
-      <TextBlock Text="{Binding CurrentWindowLanguage.CalculateButtonText}"/>
+  <DockPanel x:DataType="vm:ReactionStoichiometryViewModel">
+    <Button HorizontalAlignment="Left" DockPanel.Dock="Top" Command="{Binding GoToInfoPage}" Background="Transparent" BorderThickness="0">
+      <Image Height="20" Width="20" Source="{Binding CurrentWindowResources.InfoButtonIcon.Image}" HorizontalAlignment="Center"/>
     </Button>
-    <TextBlock Text="{Binding CurrentWindowLanguage.SecondActionTitle}" Classes="SubtitleTextBlockStyle" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
-    <StackPanel Orientation="Horizontal" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Spacing="5" HorizontalAlignment="Center">
-      <TextBlock Text="{Binding CurrentWindowLanguage.ExperimentalMassTextBlockText}" VerticalAlignment="Center"/>
-      <NumericUpDown Name="SecondaryInput" AllowSpin="False" ShowButtonSpinner="False" ClipValueToMinMax="True" Minimum="0" Value="{Binding ExperimentalMass}"/>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
+      <TextBlock Text="{Binding CurrentWindowLanguage.Title}" HorizontalAlignment="Center" Classes="TitleTextBlockStyle"/>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+        <TextBox Name="InputTextBox" Watermark="{Binding CurrentWindowLanguage.TextBoxWatermark}" Width="350" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Text="{Binding TextBoxText}"/>
+        <ComboBox Items="{Binding ChemistryProducts}" PlaceholderText="{Binding CurrentWindowLanguage.ComboBoxWatermark}" SelectedItem="{Binding SelectedProduct}">
+          <ComboBox.ItemTemplate>
+            <DataTemplate x:DataType="core:ChemistryMolecule">
+              <TextBlock Text="{Binding ChemicalComposition}"/>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+      </StackPanel>
+      <ItemsRepeater Items="{Binding ChemistryReactants}" HorizontalAlignment="Center">
+        <ItemsRepeater.Layout>
+          <UniformGridLayout Orientation="Vertical" MinColumnSpacing="3" MinRowSpacing="5" ItemsJustification="Center"/>
+        </ItemsRepeater.Layout>
+        <ItemsRepeater.ItemTemplate>
+          <DataTemplate x:DataType="core:ChemistryMolecule">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+              <TextBlock Text="{Binding ChemicalComposition}" HorizontalAlignment="Right" VerticalAlignment="Center" Classes="BodyStrongTextBlockStyle"/>
+              <NumericUpDown AllowSpin="False" ShowButtonSpinner="False" ClipValueToMinMax="True" Minimum="0" Value="{Binding Grams}" />
+            </StackPanel>
+          </DataTemplate>
+        </ItemsRepeater.ItemTemplate>
+      </ItemsRepeater>
+    
+      <TextBlock 
+        Text="{Binding SuccessMessage}"
+        HorizontalAlignment="Center"
+        IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+        Classes="BodyStrongTextBlockStyle"
+        TextWrapping="Wrap"
+        />
+      <TextBlock
+        Text="{Binding ErrorMessage}"
+        HorizontalAlignment="Center"
+        IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+        Foreground="Red"
+        Classes="BodyStrongTextBlockStyle"
+        />
+      <Button Command="{Binding Calculate}" CommandParameter="{Binding SelectedProduct}" HorizontalAlignment="Center" Classes="accent">
+        <TextBlock Text="{Binding CurrentWindowLanguage.CalculateButtonText}"/>
+      </Button>
+      <TextBlock Text="{Binding CurrentWindowLanguage.SecondActionTitle}" Classes="SubtitleTextBlockStyle" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
+      <StackPanel Orientation="Horizontal" IsVisible="{Binding SuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Spacing="5" HorizontalAlignment="Center">
+        <TextBlock Text="{Binding CurrentWindowLanguage.ExperimentalMassTextBlockText}" VerticalAlignment="Center"/>
+        <NumericUpDown Name="SecondaryInput" AllowSpin="False" ShowButtonSpinner="False" ClipValueToMinMax="True" Minimum="0" Value="{Binding ExperimentalMass}"/>
+      </StackPanel>
+      <TextBlock Text="{Binding SecondarySuccessMessage}" Classes="BodyStrongTextBlockStyle" IsVisible="{Binding SecondarySuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
     </StackPanel>
-    <TextBlock Text="{Binding SecondarySuccessMessage}" Classes="BodyStrongTextBlockStyle" IsVisible="{Binding SecondarySuccessMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" HorizontalAlignment="Center"/>
-  </StackPanel>
+  </DockPanel>
 </UserControl>

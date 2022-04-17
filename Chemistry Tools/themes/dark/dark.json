@@ -6,6 +6,12 @@
     "MainWindow": {
       "HomeIcon": "dark/home.png",
       "SettingsIcon": "dark/settings.png"
+    },
+    "ReactionStoichiometryWindow": {
+      "InfoButtonIcon": "dark/info.png"
+    },
+    "StoichiometryInfoWindow": {
+      "CloseButtonIcon": "dark/close.png"
     }
   }
 }

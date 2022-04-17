@@ -6,6 +6,12 @@
     "MainWindow": {
       "HomeIcon": "highcontrast/home.png",
       "SettingsIcon": "highcontrast/settings.png"
+    },
+    "ReactionStoichiometryWindow": {
+      "InfoButtonIcon": "highcontrast/info.png"
+    },
+    "StoichiometryInfoWindow": {
+      "CloseButtonIcon": "highcontrast/close.png"
     }
   }
 }

@@ -7,11 +7,12 @@ using Avalonia.Collections;
 using Chemistry_Tools.Core.Services.PeriodicTableService;
 using Chemistry_Tools.UserSettings;
 using Chemistry_Tools.UserSettings.WindowsLanguage;
+using Chemistry_Tools.UserSettings.WindowsResources;
 
 using ReactiveUI;
 
 namespace Chemistry_Tools.ViewModels;
-public class ReactionStoichiometryViewModel : BaseViewModelWithResources<ReactionStoichiometryWindowLanguage, object>, IRoutableViewModel
+public class ReactionStoichiometryViewModel : BaseViewModelWithResources<ReactionStoichiometryWindowLanguage, ReactionStoichiometryWindowResources>, IRoutableViewModel
 {
     public ReactionStoichiometryViewModel(IUserSettings appSettings, IScreen host, IPeriodicTableService periodicTable) : base(appSettings)
     {
@@ -25,6 +26,7 @@ public class ReactionStoichiometryViewModel : BaseViewModelWithResources<Reactio
         ParseEquation = ReactiveCommand.Create<string>(ParseInputtedEquation, canParse);
         Calculate = ReactiveCommand.Create<IChemistryMolecule>(CalculateLimitingReactant, canExecute);
         CalculateEfficiency = ReactiveCommand.Create<double>(CalculateEfficiencyOfReaction, canCalculate);
+        GoToInfoPage = ReactiveCommand.CreateFromObservable(() => host.Router.Navigate.Execute(new StoichiometryInfoViewModel(appSettings, host)));
     }
 
     private void CalculateEfficiencyOfReaction(double experimentMass)
@@ -121,8 +123,9 @@ public class ReactionStoichiometryViewModel : BaseViewModelWithResources<Reactio
         set => this.RaiseAndSetIfChanged(ref _selectedProduct, value);
     }
     public ReactiveCommand<string, Unit> ParseEquation { get; }
-    public ReactiveCommand<double, Unit> CalculateEfficiency { get; set; }
+    public ReactiveCommand<double, Unit> CalculateEfficiency { get; }
     public ReactiveCommand<IChemistryMolecule, Unit> Calculate { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> GoToInfoPage { get; }
     public (IChemistryMolecule? Molecule, decimal AmountProduced)? LimitingReactant
     {
         get => _limitingReactant;
@@ -130,5 +133,5 @@ public class ReactionStoichiometryViewModel : BaseViewModelWithResources<Reactio
     }
 
     protected override ReactionStoichiometryWindowLanguage? GetCurrentWindowLanguage(Language? currentLanguage) => currentLanguage?.ReactionStoichiometryWindow;
-    protected override object? GetCurrentWindowResources(Resources? currentResources) => null;
+    protected override ReactionStoichiometryWindowResources? GetCurrentWindowResources(Resources? currentResources) => currentResources?.ReactionStoichiometryWindow;
 }

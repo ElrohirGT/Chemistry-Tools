@@ -38,13 +38,15 @@
 		"Title": "Estequiometría de una Reacción",
 		"TextBoxWatermark": "Ejemplo: 5Ca+V2O5->5CaO+2V",
 		"ComboBoxWatermark": "Producto Objetivo",
-		"Examples": "//TODO",
-		"InstructionsTitle": "¿Cómo usar?",
 		"ErrorMessageFormat": "¡Por favor ingresa una ecuación válida!",
 		"SuccessMessageFormat": "El reactivo limitante es {0}, con una cantidad de {1} igual a: {2:N6} g.",
 		"SecondActionTitle": "% de Rendimiento",
 		"ExperimentalMassTextBlockText": "Masa experimental (g):",
 		"SecondarySuccessMessageFormat": "{0:P2} de {1}",
 		"CalculateButtonText": "Calcular"
+	},
+	"StoichiometryInfoWindow": {
+		"Title": "¿Cómo usar?",
+		"Instructions": "1) Ingresa la reacción química.\n2) Selecciona el producto objetivo.\n3) Escribe la cantidad de cada reactivo en gramos.\n4) Presiona el botón de calcular.\n\nPara calcular el % de rendimiento ingresa la masa del producto objetivo obtenida experimentalmente en el último textbox."
 	}
 }

@@ -13,6 +13,8 @@ public class Resources : IDisposable
     private bool _disposedValue;
 
     public MainWindowResources MainWindow { get; set; }
+    public StoichiometryInfoWindowResources StoichiometryInfoWindow { get; set; }
+    public ReactionStoichiometryWindowResources ReactionStoichiometryWindow { get; set; }
 
     protected virtual void Dispose(bool disposing)
     {

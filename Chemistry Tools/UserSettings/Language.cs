@@ -17,6 +17,8 @@ public sealed class Language : IEquatable<Language>
     public UpdatePopUpWindowLanguage UpdatePopUpWindow { get; set; }
     public UpdateDownloadingWindowLanguage UpdateDownloadingWindow { get; set; }
     public ErrorPopUpWindowLanguage ErrorPopUpWindow { get; set; }
+    public StoichiometryInfoWindowLanguage StoichiometryInfoWindow { get; set; }
+
     public override string ToString() => Name;
     public bool Equals(Language? other)
     {

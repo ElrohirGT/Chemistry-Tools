@@ -6,6 +6,12 @@
     "MainWindow": {
       "HomeIcon": "highcontrastmac/home.png",
       "SettingsIcon": "highcontrastmac/settings.png"
+    },
+    "ReactionStoichiometryWindow": {
+      "InfoButtonIcon": "highcontrastmac/info.png"
+    },
+    "StoichiometryInfoWindow": {
+      "CloseButtonIcon": "highcontrastmac/close.png"
     }
   }
 }

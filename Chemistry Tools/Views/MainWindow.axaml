@@ -52,7 +52,7 @@
           </StackPanel>
         </Button>
       </StackPanel>
-      <rxui:RoutedViewHost Router="{Binding Router}" />
+      <rxui:RoutedViewHost Router="{Binding Router}" Margin="5"/>
     </DockPanel>
   </Panel>
 </Window>
