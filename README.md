@@ -33,11 +33,13 @@ Updates are automatically downloaded to your system, although for the moment, th
 ## Features
 - Dark, light and high contrast themes.
 - Spanish and english language implemented, with support to create a translation to any other language.
+- Molecule molar mass calculator.
+- Reaction stoichiometry calculator.
 
 Take a look at the Trello above to see what's coming next!
 
 ## Usage
-Currently the app does nothing but change themes and languages! Other features will come with time, you can support the project by giving it a star on github or checking out the Trello above to see what's in development!
+Every feature has a how to use section within the app, it's either on the same page or you can access it by clicking on the "i" icon on the top left.
 
 ## Attributions
 **App Icon:**
