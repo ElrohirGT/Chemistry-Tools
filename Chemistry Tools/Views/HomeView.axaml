@@ -7,16 +7,14 @@
              xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Chemistry_Tools.Views.HomeView">
-  <!--<UserControl.Styles>
-  </UserControl.Styles>-->
-      <ScrollViewer Background="{DynamicResource SolidBackgroundFillColorBaseBrush}">
-        <ScrollViewer.Styles>
-          <Style Selector="ctxt|CTextBlock.Heading1">
-            <Setter Property="Foreground" Value="{DynamicResource DefaultTextForegroundThemeBrush}"/>
-          </Style>
-        </ScrollViewer.Styles>
+        <ScrollViewer>
           <md:MarkdownScrollViewer
-            Margin="5"
-            Source="https://chemistry-tools.netlify.app/CHANGELOG.md"/>
+            Source="https://chemistry-tools.netlify.app/CHANGELOG.md">
+            <md:MarkdownScrollViewer.Styles>
+              <Style Selector="ctxt|CTextBlock.Heading1, ctxt|CTextBlock.Heading2">
+                <Setter Property="Foreground" Value="{DynamicResource DefaultTextForegroundThemeBrush}"/>
+              </Style>
+            </md:MarkdownScrollViewer.Styles>
+           </md:MarkdownScrollViewer> 
       </ScrollViewer>
 </UserControl>
