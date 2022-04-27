@@ -16,6 +16,5 @@
 
   <Application.Styles>
     <sty:FluentAvaloniaTheme />
-    <!--<StyleInclude Source="avares://Chemistry Tools/FluentUIIconsDark.xaml"/>-->
   </Application.Styles>
 </Application>
