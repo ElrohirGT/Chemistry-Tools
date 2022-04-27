@@ -2,8 +2,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
              xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Chemistry_Tools.Views.HomeView">
-  <TextBlock Text="Tools go here!" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="DisplayTextBlockStyle"/>
+  <!--<UserControl.Styles>
+  </UserControl.Styles>-->
+      <ScrollViewer Background="{DynamicResource SolidBackgroundFillColorBaseBrush}">
+        <ScrollViewer.Styles>
+          <Style Selector="ctxt|CTextBlock.Heading1">
+            <Setter Property="Foreground" Value="{DynamicResource DefaultTextForegroundThemeBrush}"/>
+          </Style>
+        </ScrollViewer.Styles>
+          <md:MarkdownScrollViewer
+            Margin="5"
+            Source="https://chemistry-tools.netlify.app/CHANGELOG.md"/>
+      </ScrollViewer>
 </UserControl>
